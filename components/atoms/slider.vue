@@ -1,14 +1,19 @@
 <template>
   <div class="slider">
     <div class="bar">
-      <div class="bar-left"></div>
+      <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
-    <div class="dot"></div>
+    <div class="dot" :style="{ left: percentage + '%' }"></div>
+    {{ percentage }}
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    percentage: { type: Number, requred: true, default: 50 }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -30,11 +35,13 @@ export default {}
   border-radius: 3px 0 0 3px;
 }
 .dot {
+  margin-left: -8px;
   width: 1rem;
   height: 1rem;
   background-color: $color-white;
   border-radius: 0.5rem;
   position: relative;
-  top: -10px;
+  top: -11px;
+  box-shadow: 0 0 0.375rem rgba(0, 0, 0, 0.3);
 }
 </style>

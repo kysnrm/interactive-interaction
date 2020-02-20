@@ -5,7 +5,7 @@
     </div>
     <div class="main">main</div>
     <div class="controller">
-      <Slider></Slider>
+      <Slider :percentage="30"></Slider>
     </div>
   </div>
 </template>
