@@ -4,13 +4,17 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div class="main">main</div>
-    <div class="controller">controller</div>
+    <div class="controller">
+      <Slider></Slider>
+    </div>
   </div>
 </template>
 
 <script>
+import Slider from '@/components/atoms/slider'
+
 export default {
-  components: {}
+  components: { Slider }
 }
 </script>
 
