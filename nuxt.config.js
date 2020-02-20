@@ -40,7 +40,20 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [
+    'nuxt-webfontloader',
+    '@nuxtjs/style-resources'
+  ],
+  webfontloader: {
+    google: {
+      families: ['Oswald']
+    }
+  },
+  styleResources: {
+    scss: [
+      '@/assets/scss/variables.scss'
+    ]
+  },
   /*
    ** Build configuration
    */
