@@ -5,16 +5,16 @@
     </div>
     <div class="main">main</div>
     <div class="controller">
-      <Slider :percentage="30"></Slider>
+      <BaseSlider :percentage="30"></BaseSlider>
     </div>
   </div>
 </template>
 
 <script>
-import Slider from '@/components/atoms/slider'
+import BaseSlider from '@/components/atoms/BaseSlider'
 
 export default {
-  components: { Slider }
+  components: { BaseSlider }
 }
 </script>
 
