@@ -5,16 +5,16 @@
     </div>
     <div class="main">main</div>
     <div class="controller">
-      <BaseSlider :percentage="30"></BaseSlider>
+      <ControlSlider :name="rectSize" :min="10" :max="100"></ControlSlider>
     </div>
   </div>
 </template>
 
 <script>
-import BaseSlider from '@/components/atoms/BaseSlider'
+import ControlSlider from '@/components/molecules/ControllSlider'
 
 export default {
-  components: { BaseSlider }
+  components: { ControlSlider }
 }
 </script>
 
