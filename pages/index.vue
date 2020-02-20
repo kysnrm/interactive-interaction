@@ -4,13 +4,28 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div class="main">main</div>
-    <div class="controller">controller</div>
+    <div class="controller">
+      <controll-slider
+        slider-name="rectSize"
+        min-number="10"
+        max-number="100"
+        unit-name="px"
+      ></controll-slider>
+      <controll-slider
+        slider-name="spreadSpeed"
+        min-number="10"
+        max-number="30"
+        unit-name=""
+      ></controll-slider>
+    </div>
   </div>
 </template>
 
 <script>
+import ControllSlider from '@/components/molecules/ControllSlider'
+
 export default {
-  components: {}
+  components: { ControllSlider }
 }
 </script>
 
@@ -40,5 +55,8 @@ export default {
   width: 16rem;
   background-color: $color-secondary;
   color: $color-white;
+}
+.controll-slider {
+  margin-bottom: 0.75rem;
 }
 </style>
