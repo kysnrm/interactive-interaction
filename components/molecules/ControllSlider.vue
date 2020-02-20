@@ -1,10 +1,12 @@
 <template>
   <div class="controll-slider">
     <div class="slider-header">
-      <div class="slider-name">{{ name }}</div>
-      <div class="slider-value">30</div>
+      <div class="slider-name">{{ sliderName }}</div>
+      <div class="slider-value">{{ value.toString() + unitName }}</div>
     </div>
-    <BaseSlider :percentage="culcPercentage(value, min, max)"></BaseSlider>
+    <base-slider
+      :percentage="culcPercentage(value, minNumber, maxNumber)"
+    ></base-slider>
   </div>
 </template>
 
@@ -14,9 +16,10 @@ import BaseSlider from '../atoms/BaseSlider'
 export default {
   components: { BaseSlider },
   props: {
-    name: { type: String, required: true, default: 'sliderName' },
-    min: { type: Number, required: true, default: 0 },
-    max: { type: Number, required: true, default: 100 }
+    sliderName: { type: String, required: true, default: 'sliderName' },
+    minNumber: { type: Number, required: true, default: 0 },
+    maxNumber: { type: Number, required: true, default: 100 },
+    unitName: { type: String }
   },
   data: () => {
     return {
@@ -26,7 +29,7 @@ export default {
   methods: {
     culcPercentage(value, min, max) {
       const range = max - min
-      return (value / range) * 100
+      return ((value - min) / range) * 100
     }
   }
 }

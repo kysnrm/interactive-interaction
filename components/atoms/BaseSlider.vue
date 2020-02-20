@@ -4,7 +4,6 @@
       <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
     <div class="dot" :style="{ left: percentage + '%' }"></div>
-    {{ percentage }}
   </div>
 </template>
 

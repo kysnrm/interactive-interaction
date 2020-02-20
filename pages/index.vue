@@ -5,16 +5,27 @@
     </div>
     <div class="main">main</div>
     <div class="controller">
-      <ControlSlider :name="rectSize" :min="10" :max="100"></ControlSlider>
+      <controll-slider
+        slider-name="rectSize"
+        min-number="10"
+        max-number="100"
+        unit-name="px"
+      ></controll-slider>
+      <controll-slider
+        slider-name="spreadSpeed"
+        min-number="10"
+        max-number="30"
+        unit-name=""
+      ></controll-slider>
     </div>
   </div>
 </template>
 
 <script>
-import ControlSlider from '@/components/molecules/ControllSlider'
+import ControllSlider from '@/components/molecules/ControllSlider'
 
 export default {
-  components: { ControlSlider }
+  components: { ControllSlider }
 }
 </script>
 
@@ -44,5 +55,8 @@ export default {
   width: 16rem;
   background-color: $color-secondary;
   color: $color-white;
+}
+.controll-slider {
+  margin-bottom: 0.75rem;
 }
 </style>
