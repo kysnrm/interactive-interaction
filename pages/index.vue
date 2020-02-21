@@ -7,14 +7,14 @@
     <div class="controller">
       <controll-slider
         slider-name="rectSize"
-        min-number="10"
-        max-number="100"
+        :min-number="10"
+        :max-number="100"
         unit-name="px"
       ></controll-slider>
       <controll-slider
         slider-name="spreadSpeed"
-        min-number="10"
-        max-number="30"
+        :min-number="10"
+        :max-number="30"
         unit-name=""
       ></controll-slider>
     </div>

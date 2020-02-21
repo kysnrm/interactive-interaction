@@ -19,7 +19,7 @@ export default {
     sliderName: { type: String, required: true, default: 'sliderName' },
     minNumber: { type: Number, required: true, default: 0 },
     maxNumber: { type: Number, required: true, default: 100 },
-    unitName: { type: String }
+    unitName: { type: String, required: false, default: '' }
   },
   data: () => {
     return {
