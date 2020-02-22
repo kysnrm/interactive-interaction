@@ -3,8 +3,13 @@
     <div class="menu">
       <h1>Interactive Interaction Design</h1>
     </div>
-    <div class="main">
-      <base-canvas :rect-size="rectSize"></base-canvas>
+    <div ref="main" class="main">
+      <base-canvas
+        ref="canvas"
+        :rect-size="rectSize"
+        :width="mainWidth"
+        :height="mainHeight"
+      ></base-canvas>
     </div>
     <div class="controller">
       <controll-slider
@@ -32,10 +37,17 @@ export default {
     BaseCanvas,
     ControllSlider
   },
-  data: () => {
+  data() {
     return {
-      rectSize: 500
+      rectSize: 500,
+      mainWidth: 0,
+      mainHeight: 0
     }
+  },
+  mounted() {
+    const mainArea = this.$refs.main
+    this.mainWidth = mainArea.offsetWidth
+    this.mainHeight = mainArea.offsetHeight
   }
 }
 </script>

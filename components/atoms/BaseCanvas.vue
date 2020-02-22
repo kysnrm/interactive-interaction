@@ -1,5 +1,5 @@
 <template>
-  <canvas class="base-canvas" width="500" height="500">
+  <canvas class="base-canvas">
     This browser doesn't support Canvas.
   </canvas>
 </template>
