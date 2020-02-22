@@ -2,7 +2,9 @@
   <div class="controll-slider">
     <div class="slider-header">
       <div class="slider-name">{{ sliderName }}</div>
-      <div class="slider-value">{{ value.toString() + unitName }}</div>
+      <div class="slider-value">
+        {{ Math.round(value.toString()) + unitName }}
+      </div>
     </div>
     <base-slider
       :percentage="culcPercentage(value, minValue, maxValue)"
