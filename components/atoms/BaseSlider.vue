@@ -34,7 +34,7 @@ export default {
         return
       }
       const distance = e.clientX - this.lastPosition
-      this.$emit('incrementValue', distance)
+      this.$emit('dotMove', distance)
       this.lastPosition = e.clientX
     },
     dotTouchEnd(e) {
