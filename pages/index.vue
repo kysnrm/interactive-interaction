@@ -3,7 +3,9 @@
     <div class="menu">
       <h1>Interactive Interaction Design</h1>
     </div>
-    <div class="main">main</div>
+    <div class="main">
+      <base-canvas :rect-size="100"></base-canvas>
+    </div>
     <div class="controller">
       <controll-slider
         slider-name="rectSize"
@@ -22,10 +24,14 @@
 </template>
 
 <script>
+import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
 
 export default {
-  components: { ControllSlider }
+  components: {
+    BaseCanvas,
+    ControllSlider
+  }
 }
 </script>
 
