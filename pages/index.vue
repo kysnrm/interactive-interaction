@@ -45,6 +45,7 @@ export default {
     }
   },
   mounted() {
+    // マウント後に canvas のサイズを決定する
     const mainArea = this.$refs.main
     this.mainWidth = mainArea.offsetWidth
     this.mainHeight = mainArea.offsetHeight
