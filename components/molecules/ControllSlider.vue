@@ -5,9 +5,9 @@
       <div class="slider-value">{{ value.toString() + unitName }}</div>
     </div>
     <base-slider
-      :percentage="culcPercentage(value, minNumber, maxNumber)"
+      :percentage="culcPercentage(value, minValue, maxValue)"
       @clickBar="clickBar($event)"
-      @incrementValue="changeValue($event)"
+      @incrementValue="dotMove($event)"
     ></base-slider>
   </div>
 </template>
@@ -19,8 +19,8 @@ export default {
   components: { BaseSlider },
   props: {
     sliderName: { type: String, required: true, default: 'sliderName' },
-    minNumber: { type: Number, required: true, default: 0 },
-    maxNumber: { type: Number, required: true, default: 100 },
+    minValue: { type: Number, required: true, default: 0 },
+    maxValue: { type: Number, required: true, default: 100 },
     unitName: { type: String, required: false, default: '' }
   },
   data: () => {
@@ -33,23 +33,23 @@ export default {
       const range = max - min
       return ((value - min) / range) * 100
     },
-    changeValue(e) {
+    dotMove(e) {
       const width = 208
-      const range = this.maxNumber - this.minNumber
+      const range = this.maxValue - this.minValue
       const moveDistance = (e / width) * range
       this.value += moveDistance
-      if (this.value < this.minNumber) {
-        this.value = this.minNumber
+      if (this.value < this.minValue) {
+        this.value = this.minValue
       }
-      if (this.value > this.maxNumber) {
-        this.value = this.maxNumber
+      if (this.value > this.maxValue) {
+        this.value = this.maxValue
       }
     },
     clickBar(e) {
       const width = 208
-      const range = this.maxNumber - this.minNumber
+      const range = this.maxValue - this.minValue
       const clickPosition = e.offsetX
-      this.value = this.minNumber + (clickPosition / width) * range
+      this.value = this.minValue + (clickPosition / width) * range
     }
   }
 }
