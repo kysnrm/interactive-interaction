@@ -6,6 +6,7 @@
     </div>
     <base-slider
       :percentage="culcPercentage(value, minNumber, maxNumber)"
+      @incrementValue="changeValue($event)"
     ></base-slider>
   </div>
 </template>
@@ -30,6 +31,18 @@ export default {
     culcPercentage(value, min, max) {
       const range = max - min
       return ((value - min) / range) * 100
+    },
+    changeValue(e) {
+      const width = 208
+      const range = this.maxNumber - this.minNumber
+      const moveDistance = (e / width) * range
+      this.value += moveDistance
+      if (this.value < this.minNumber) {
+        this.value = this.minNumber
+      }
+      if (this.value > this.maxNumber) {
+        this.value = this.maxNumber
+      }
     }
   }
 }
