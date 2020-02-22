@@ -4,7 +4,7 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div class="main">
-      <base-canvas :rect-size="100"></base-canvas>
+      <base-canvas :rect-size="rectSize"></base-canvas>
     </div>
     <div class="controller">
       <controll-slider
@@ -31,6 +31,11 @@ export default {
   components: {
     BaseCanvas,
     ControllSlider
+  },
+  data: () => {
+    return {
+      rectSize: 500
+    }
   }
 }
 </script>
