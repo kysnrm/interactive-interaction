@@ -6,6 +6,7 @@
     </div>
     <base-slider
       :percentage="culcPercentage(value, minNumber, maxNumber)"
+      @clickBar="clickBar($event)"
       @incrementValue="changeValue($event)"
     ></base-slider>
   </div>
@@ -43,6 +44,12 @@ export default {
       if (this.value > this.maxNumber) {
         this.value = this.maxNumber
       }
+    },
+    clickBar(e) {
+      const width = 208
+      const range = this.maxNumber - this.minNumber
+      const clickPosition = e.offsetX
+      this.value = this.minNumber + (clickPosition / width) * range
     }
   }
 }

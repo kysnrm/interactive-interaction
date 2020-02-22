@@ -1,6 +1,6 @@
 <template>
   <div class="slider">
-    <div class="bar">
+    <div class="bar" @click="$emit('clickBar', $event)">
       <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
     <div
