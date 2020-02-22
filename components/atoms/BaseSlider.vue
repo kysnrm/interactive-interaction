@@ -1,6 +1,6 @@
 <template>
   <div class="slider">
-    <div class="bar">
+    <div class="bar" @click="$emit('clickBar', $event)">
       <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
     <div
@@ -34,7 +34,7 @@ export default {
         return
       }
       const distance = e.clientX - this.lastPosition
-      this.$emit('incrementValue', distance)
+      this.$emit('dotMove', distance)
       this.lastPosition = e.clientX
     },
     dotTouchEnd(e) {
