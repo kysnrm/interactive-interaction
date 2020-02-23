@@ -3,7 +3,14 @@
     <div class="menu">
       <h1>Interactive Interaction Design</h1>
     </div>
-    <div class="main">main</div>
+    <div ref="main" class="main">
+      <base-canvas
+        ref="canvas"
+        :rect-size="rectSize"
+        :width="mainWidth"
+        :height="mainHeight"
+      ></base-canvas>
+    </div>
     <div class="controller">
       <controll-slider
         slider-name="rectSize"
@@ -22,10 +29,27 @@
 </template>
 
 <script>
+import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
 
 export default {
-  components: { ControllSlider }
+  components: {
+    BaseCanvas,
+    ControllSlider
+  },
+  data() {
+    return {
+      rectSize: 500,
+      mainWidth: 0,
+      mainHeight: 0
+    }
+  },
+  mounted() {
+    // マウント後に canvas のサイズを決定する
+    const mainArea = this.$refs.main
+    this.mainWidth = mainArea.offsetWidth
+    this.mainHeight = mainArea.offsetHeight
+  }
 }
 </script>
 
