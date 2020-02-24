@@ -6,18 +6,15 @@
 
 <script>
 export default {
-  props: {
-    rectSize: { type: Number, required: true, default: 50 }
+  computed: {
+    rectSize() {
+      return this.$store.state.canvasVariables.rectSize
+    }
   },
   mounted() {
     const ctx = this.$el.getContext('2d')
-    ctx.fillRect(0, 0, this.rectSize, this.rectSize)
-  },
-  watch: {
-    rectSize: () => {
-      const ctx = this.$el.getContext('2d')
-      ctx.fillRect(0, 0, this.rectSize, this.rectSize)
-    }
+    const rectSize = this.$store.state.canvasVariables.rectSize
+    ctx.fillRect(0, 0, rectSize, rectSize)
   }
 }
 </script>

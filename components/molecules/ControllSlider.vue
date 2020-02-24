@@ -3,11 +3,11 @@
     <div class="slider-header">
       <div class="slider-name">{{ sliderName }}</div>
       <div class="slider-value">
-        {{ Math.round(value.toString()) + unitName }}
+        {{ Math.round(rectSize.toString()) + unitName }}
       </div>
     </div>
     <base-slider
-      :percentage="culcPercentage(value, minValue, maxValue)"
+      :percentage="culcPercentage(rectSize, minValue, maxValue)"
       @clickBar="clickBar($event)"
       @dotMove="dotMove($event)"
     ></base-slider>
@@ -30,6 +30,11 @@ export default {
       value: 30
     }
   },
+  computed: {
+    rectSize() {
+      return this.$store.state.canvasVariables.rectSize
+    }
+  },
   methods: {
     culcPercentage(value, min, max) {
       const range = max - min
@@ -39,19 +44,21 @@ export default {
       const width = 208
       const range = this.maxValue - this.minValue
       const moveDistance = (e / width) * range
-      this.value += moveDistance
-      if (this.value < this.minValue) {
-        this.value = this.minValue
+      let newValue = this.rectSize + moveDistance
+      if (newValue < this.minValue) {
+        newValue = this.minValue
       }
-      if (this.value > this.maxValue) {
-        this.value = this.maxValue
+      if (newValue > this.maxValue) {
+        newValue = this.maxValue
       }
+      this.$store.commit('updateRectSize', newValue)
     },
     clickBar(e) {
       const width = 208
       const range = this.maxValue - this.minValue
       const clickPosition = e.offsetX
-      this.value = this.minValue + (clickPosition / width) * range
+      const newValue = this.minValue + (clickPosition / width) * range
+      this.$store.commit('updateRectSize', newValue)
     }
   }
 }
