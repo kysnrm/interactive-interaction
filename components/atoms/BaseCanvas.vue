@@ -13,8 +13,13 @@ export default {
   },
   mounted() {
     const ctx = this.$el.getContext('2d')
-    const rectSize = this.$store.state.canvasVariables.rectSize
-    ctx.fillRect(0, 0, rectSize, rectSize)
+    this.$store.subscribe((mutation, state) => {
+      if (mutation.type === 'updateRectSize') {
+        const rectSize = state.canvasVariables.rectSize
+        ctx.clearRect(0, 0, 100, 100)
+        ctx.fillRect(0, 0, rectSize, rectSize)
+      }
+    })
   }
 }
 </script>
