@@ -18,12 +18,6 @@
         :max-value="100"
         unit-name="px"
       ></controll-slider>
-      <controll-slider
-        slider-name="spreadSpeed"
-        :min-value="10"
-        :max-value="30"
-        unit-name=""
-      ></controll-slider>
     </div>
   </div>
 </template>
