@@ -6,7 +6,6 @@
     <div ref="main" class="main">
       <base-canvas
         ref="canvas"
-        :rect-size="rectSize"
         :width="mainWidth"
         :height="mainHeight"
       ></base-canvas>
