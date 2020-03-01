@@ -12,6 +12,12 @@ export default {
     },
     colorRed() {
       return this.$store.state.canvasVariables.colorRed
+    },
+    colorGreen() {
+      return this.$store.state.canvasVariables.colorGreen
+    },
+    colorBlue() {
+      return this.$store.state.canvasVariables.colorBlue
     }
   },
   mounted() {
@@ -19,12 +25,16 @@ export default {
     this.$store.subscribe((mutation, state) => {
       if (
         mutation.type === 'updateRectSize' ||
-        mutation.type === 'updateColorRed'
+        mutation.type === 'updateColorRed' ||
+        mutation.type === 'updateColorGreen' ||
+        mutation.type === 'updateColorBlue'
       ) {
         const rectSize = state.canvasVariables.rectSize
         const colorRed = state.canvasVariables.colorRed
+        const colorGreen = state.canvasVariables.colorGreen
+        const colorBlue = state.canvasVariables.colorBlue
         ctx.clearRect(0, 0, 100, 100)
-        ctx.fillStyle = `rgb(${colorRed}, 0, 0)`
+        ctx.fillStyle = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
         ctx.fillRect(0, 0, rectSize, rectSize)
       }
     })

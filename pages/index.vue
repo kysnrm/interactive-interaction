@@ -27,6 +27,20 @@
         :value="colorRed"
         @updateValue="updateColorRed"
       ></controll-slider>
+      <controll-slider
+        slider-name="colorGreen"
+        :min-value="0"
+        :max-value="255"
+        :value="colorGreen"
+        @updateValue="updateColorGreen"
+      ></controll-slider>
+      <controll-slider
+        slider-name="colorBlue"
+        :min-value="0"
+        :max-value="255"
+        :value="colorBlue"
+        @updateValue="updateColorBlue"
+      ></controll-slider>
     </div>
   </div>
 </template>
@@ -52,6 +66,12 @@ export default {
     },
     colorRed() {
       return this.$store.state.canvasVariables.colorRed
+    },
+    colorGreen() {
+      return this.$store.state.canvasVariables.colorGreen
+    },
+    colorBlue() {
+      return this.$store.state.canvasVariables.colorBlue
     }
   },
   mounted() {
@@ -66,6 +86,12 @@ export default {
     },
     updateColorRed(newValue) {
       this.$store.commit('updateColorRed', newValue)
+    },
+    updateColorGreen(newValue) {
+      this.$store.commit('updateColorGreen', newValue)
+    },
+    updateColorBlue(newValue) {
+      this.$store.commit('updateColorBlue', newValue)
     }
   }
 }
