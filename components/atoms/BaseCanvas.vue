@@ -7,9 +7,6 @@
 <script>
 export default {
   computed: {
-    ctx() {
-      return this.$el.getContext('2d')
-    },
     rectSize() {
       return this.$store.state.canvasVariables.rectSize
     },
@@ -24,6 +21,10 @@ export default {
     }
   },
   mounted() {
+    this.ctx = this.$el.getContext('2d')
+    setTimeout(() => {
+      this.render(this.rectSize, 100, 100, 100)
+    })
     this.$store.subscribe((mutation, state) => {
       if (
         mutation.type === 'updateRectSize' ||
