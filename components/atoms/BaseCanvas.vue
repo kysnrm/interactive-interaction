@@ -23,7 +23,7 @@ export default {
   mounted() {
     this.ctx = this.$el.getContext('2d')
     setTimeout(() => {
-      this.render(this.rectSize, 100, 100, 100)
+      this.render(this.rectSize, this.colorRed, this.colorGreen, this.colorBlue)
     })
     this.$store.subscribe((mutation, state) => {
       if (
