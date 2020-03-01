@@ -1,14 +1,12 @@
 <template>
   <div class="slider">
-    <div class="bar" @click="$emit('clickBar', $event)">
+    <div class="bar" @mousedown="barTouchStart($event)">
       <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
     <div
       class="dot"
       :style="{ left: percentage + '%' }"
       @mousedown="dotTouchStart($event)"
-      @mousemove="dotMove($event)"
-      @mouseup="dotTouchEnd($event)"
     ></div>
   </div>
 </template>
@@ -28,6 +26,9 @@ export default {
     dotTouchStart(e) {
       this.isMousedown = true
       this.lastPosition = e.clientX
+      document.addEventListener('mousemove', this.dotMove)
+      document.addEventListener('mouseup', this.dotTouchEnd)
+      e.preventDefault()
     },
     dotMove(e) {
       if (this.isMousedown !== true) {
@@ -40,6 +41,13 @@ export default {
     dotTouchEnd(e) {
       this.isMousedown = false
       this.lastPosition = 0
+      document.removeEventListener('mousemove', this.dotMove)
+      document.removeEventListener('mouseup', this.dotTouchEnd)
+    },
+    barTouchStart(e) {
+      this.dotTouchStart(e)
+      this.$emit('clickBar', e)
+      e.preventDefault()
     }
   }
 }
@@ -57,7 +65,6 @@ export default {
   border-radius: 3px;
 }
 .bar-left {
-  width: 50%;
   height: 100%;
   background-color: $color-primary;
   border-radius: 3px 0 0 3px;
