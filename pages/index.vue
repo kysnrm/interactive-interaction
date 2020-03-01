@@ -16,12 +16,16 @@
         slider-name="rectSize"
         :min-value="10"
         :max-value="100"
+        :value="rectSize"
         unit-name="px"
+        @updateValue="updateRectSize"
       ></controll-slider>
       <controll-slider
-        slider-name="color"
+        slider-name="colorRed"
         :min-value="0"
         :max-value="255"
+        :value="colorRed"
+        @updateValue="updateColorRed"
       ></controll-slider>
     </div>
   </div>
@@ -38,9 +42,16 @@ export default {
   },
   data() {
     return {
-      rectSize: 500,
       mainWidth: 0,
       mainHeight: 0
+    }
+  },
+  computed: {
+    rectSize() {
+      return this.$store.state.canvasVariables.rectSize
+    },
+    colorRed() {
+      return this.$store.state.canvasVariables.colorRed
     }
   },
   mounted() {
@@ -48,6 +59,14 @@ export default {
     const mainArea = this.$refs.main
     this.mainWidth = mainArea.offsetWidth
     this.mainHeight = mainArea.offsetHeight
+  },
+  methods: {
+    updateRectSize(newValue) {
+      this.$store.commit('updateRectSize', newValue)
+    },
+    updateColorRed(newValue) {
+      this.$store.commit('updateColorRed', newValue)
+    }
   }
 }
 </script>
