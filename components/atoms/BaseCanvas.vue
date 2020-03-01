@@ -21,7 +21,10 @@ export default {
     }
   },
   mounted() {
-    const ctx = this.$el.getContext('2d')
+    this.ctx = this.$el.getContext('2d')
+    setTimeout(() => {
+      this.render(this.rectSize, this.colorRed, this.colorGreen, this.colorBlue)
+    })
     this.$store.subscribe((mutation, state) => {
       if (
         mutation.type === 'updateRectSize' ||
@@ -33,11 +36,16 @@ export default {
         const colorRed = state.canvasVariables.colorRed
         const colorGreen = state.canvasVariables.colorGreen
         const colorBlue = state.canvasVariables.colorBlue
-        ctx.clearRect(0, 0, 100, 100)
-        ctx.fillStyle = `rgb(${colorRed}, ${colorGreen}, ${colorBlue})`
-        ctx.fillRect(0, 0, rectSize, rectSize)
+        this.render(rectSize, colorRed, colorGreen, colorBlue)
       }
     })
+  },
+  methods: {
+    render(size, red, green, blue) {
+      this.ctx.clearRect(0, 0, 100, 100)
+      this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
+      this.ctx.fillRect(0, 0, size, size)
+    }
   }
 }
 </script>
