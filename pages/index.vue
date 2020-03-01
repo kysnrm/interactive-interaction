@@ -18,6 +18,11 @@
         :max-value="100"
         unit-name="px"
       ></controll-slider>
+      <controll-slider
+        slider-name="color"
+        :min-value="0"
+        :max-value="255"
+      ></controll-slider>
     </div>
   </div>
 </template>
