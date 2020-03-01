@@ -1,6 +1,6 @@
 <template>
-  <div class="slider">
-    <div class="bar" @click="$emit('clickBar', $event)">
+  <div class="slider" @mousedown="barTouchStart($event)">
+    <div class="bar">
       <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
     <div
@@ -43,6 +43,11 @@ export default {
       this.lastPosition = 0
       document.removeEventListener('mousemove', this.dotMove)
       document.removeEventListener('mouseup', this.dotTouchEnd)
+    },
+    barTouchStart(e) {
+      this.dotTouchStart(e)
+      this.$emit('clickBar', e)
+      e.preventDefault()
     }
   }
 }
