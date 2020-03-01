@@ -1,6 +1,6 @@
 <template>
-  <div class="slider" @mousedown="barTouchStart($event)">
-    <div class="bar">
+  <div class="slider">
+    <div class="bar" @mousedown="barTouchStart($event)">
       <div class="bar-left" :style="{ width: percentage + '%' }"></div>
     </div>
     <div
@@ -65,7 +65,6 @@ export default {
   border-radius: 3px;
 }
 .bar-left {
-  width: 50%;
   height: 100%;
   background-color: $color-primary;
   border-radius: 3px 0 0 3px;
