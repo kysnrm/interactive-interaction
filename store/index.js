@@ -3,7 +3,7 @@ export const state = () => ({
     rectSize: 50,
     colorRed: 127,
     colorGreen: 127,
-    colorBlue: 127
+    blueSpeed: 1
   }
 })
 
@@ -17,7 +17,7 @@ export const mutations = {
   updateColorGreen(state, value) {
     state.canvasVariables.colorGreen = value
   },
-  updateColorBlue(state, value) {
-    state.canvasVariables.colorBlue = value
+  updateBlueSpeed(state, value) {
+    state.canvasVariables.blueSpeed = value
   }
 }
