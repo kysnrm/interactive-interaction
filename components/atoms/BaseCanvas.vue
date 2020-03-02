@@ -23,23 +23,7 @@ export default {
   mounted() {
     this.ctx = this.$el.getContext('2d')
     this.startTime = Date.now()
-    setTimeout(() => {
-      this.render()
-    })
-    // this.$store.subscribe((mutation, state) => {
-    //   if (
-    //     mutation.type === 'updateRectSize' ||
-    //     mutation.type === 'updateColorRed' ||
-    //     mutation.type === 'updateColorGreen' ||
-    //     mutation.type === 'updateColorBlue'
-    //   ) {
-    //     const rectSize = state.canvasVariables.rectSize
-    //     const colorRed = state.canvasVariables.colorRed
-    //     const colorGreen = state.canvasVariables.colorGreen
-    //     const colorBlue = state.canvasVariables.colorBlue
-    //     this.render(rectSize, colorRed, colorGreen, colorBlue)
-    //   }
-    // })
+    this.render()
   },
   methods: {
     render() {
