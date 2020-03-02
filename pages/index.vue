@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
 
@@ -80,18 +82,24 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    updateRectSize(newValue) {
-      this.$store.commit('updateRectSize', newValue)
-    },
-    updateColorRed(newValue) {
-      this.$store.commit('updateColorRed', newValue)
-    },
-    updateColorGreen(newValue) {
-      this.$store.commit('updateColorGreen', newValue)
-    },
-    updateBlueSpeed(newValue) {
-      this.$store.commit('updateBlueSpeed', newValue)
-    }
+    ...mapMutations([
+      'updateRectSize',
+      'updateColorRed',
+      'updateColorGreen',
+      'updateBlueSpeed'
+    ])
+    // updateRectSize(newValue) {
+    //   this.$store.commit('updateRectSize', newValue)
+    // },
+    // updateColorRed(newValue) {
+    //   this.$store.commit('updateColorRed', newValue)
+    // },
+    // updateColorGreen(newValue) {
+    //   this.$store.commit('updateColorGreen', newValue)
+    // },
+    // updateBlueSpeed(newValue) {
+    //   this.$store.commit('updateBlueSpeed', newValue)
+    // }
   }
 }
 </script>
