@@ -16,6 +16,16 @@
     </div>
     <div class="controller">
       <controll-slider
+        v-for="(value, name, index) in myStore"
+        :key="index"
+        :slider-name="name"
+        :min-value="value.minValue"
+        :max-value="value.maxValue"
+        :value="value.value"
+        :unit-name="value.unitName"
+        @updateValue="controllers[value.mutation]"
+      ></controll-slider>
+      <controll-slider
         slider-name="rectSize"
         :min-value="rectSize.minValue"
         :max-value="rectSize.maxValue"
@@ -69,6 +79,9 @@ export default {
     }
   },
   computed: {
+    myStore() {
+      return this.$store.state.canvasVariables
+    },
     rectSize() {
       return this.$store.state.canvasVariables.rectSize
     },

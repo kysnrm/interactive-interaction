@@ -4,25 +4,29 @@ export const state = () => ({
       value: 50,
       minValue: 10,
       maxValue: 100,
-      unitName: 'px'
+      unitName: 'px',
+      mutation: 'updateRectSize'
     },
     colorRed: {
       value: 127,
       minValue: 0,
       maxValue: 255,
-      unitName: ''
+      unitName: '',
+      mutation: 'updateColorRed'
     },
     colorGreen: {
       value: 127,
       minValue: 0,
       maxValue: 255,
-      unitName: ''
+      unitName: '',
+      mutation: 'updateColorGreen'
     },
     blueSpeed: {
       value: 1,
       minValue: 1,
       maxValue: 10,
-      unitName: ''
+      unitName: '',
+      mutation: 'updateBlueSpeed'
     }
   }
 })
