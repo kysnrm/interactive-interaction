@@ -92,18 +92,6 @@ export default {
       'updateColorGreen',
       'updateBlueSpeed'
     ])
-    // updateRectSize(newValue) {
-    //   this.$store.commit('updateRectSize', newValue)
-    // },
-    // updateColorRed(newValue) {
-    //   this.$store.commit('updateColorRed', newValue)
-    // },
-    // updateColorGreen(newValue) {
-    //   this.$store.commit('updateColorGreen', newValue)
-    // },
-    // updateBlueSpeed(newValue) {
-    //   this.$store.commit('updateBlueSpeed', newValue)
-    // }
   }
 }
 </script>
