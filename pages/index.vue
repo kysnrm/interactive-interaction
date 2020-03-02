@@ -8,6 +8,10 @@
         ref="canvas"
         :width="mainWidth"
         :height="mainHeight"
+        :rect-size="rectSize"
+        :color-red="colorRed"
+        :color-green="colorGreen"
+        :blue-speed="blueSpeed"
       ></base-canvas>
     </div>
     <div class="controller">
@@ -45,6 +49,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
 
@@ -80,18 +86,12 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    updateRectSize(newValue) {
-      this.$store.commit('updateRectSize', newValue)
-    },
-    updateColorRed(newValue) {
-      this.$store.commit('updateColorRed', newValue)
-    },
-    updateColorGreen(newValue) {
-      this.$store.commit('updateColorGreen', newValue)
-    },
-    updateBlueSpeed(newValue) {
-      this.$store.commit('updateBlueSpeed', newValue)
-    }
+    ...mapMutations([
+      'updateRectSize',
+      'updateColorRed',
+      'updateColorGreen',
+      'updateBlueSpeed'
+    ])
   }
 }
 </script>

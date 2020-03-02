@@ -6,19 +6,11 @@
 
 <script>
 export default {
-  computed: {
-    rectSize() {
-      return this.$store.state.canvasVariables.rectSize
-    },
-    colorRed() {
-      return this.$store.state.canvasVariables.colorRed
-    },
-    colorGreen() {
-      return this.$store.state.canvasVariables.colorGreen
-    },
-    blueSpeed() {
-      return this.$store.state.canvasVariables.blueSpeed
-    }
+  props: {
+    rectSize: { type: Number, required: true, default: 50 },
+    colorRed: { type: Number, required: true, default: 127 },
+    colorGreen: { type: Number, required: true, default: 127 },
+    blueSpeed: { type: Number, required: true, default: 1 }
   },
   mounted() {
     this.ctx = this.$el.getContext('2d')
