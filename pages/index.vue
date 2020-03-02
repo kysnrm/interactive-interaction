@@ -8,6 +8,10 @@
         ref="canvas"
         :width="mainWidth"
         :height="mainHeight"
+        :rect-size="rectSize"
+        :color-red="colorRed"
+        :color-green="colorGreen"
+        :blue-speed="blueSpeed"
       ></base-canvas>
     </div>
     <div class="controller">
