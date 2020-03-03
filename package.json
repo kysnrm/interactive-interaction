@@ -13,7 +13,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-material-design-icons": "^4.4.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

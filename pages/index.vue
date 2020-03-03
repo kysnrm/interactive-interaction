@@ -15,6 +15,7 @@
       ></base-canvas>
     </div>
     <div class="controller">
+      <base-pulldown />
       <controll-slider
         v-for="(value, name, index) in myStore"
         :key="index"
@@ -32,13 +33,16 @@
 <script>
 import { mapMutations } from 'vuex'
 
+import 'vue-material-design-icons/styles.css'
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
+import BasePulldown from '@/components/atoms/BasePulldown'
 
 export default {
   components: {
     BaseCanvas,
-    ControllSlider
+    ControllSlider,
+    BasePulldown
   },
   data() {
     return {
@@ -70,6 +74,7 @@ export default {
   display: flex;
   justify-content: space-between;
   font-family: 'Oswald', sans-serif;
+  line-height: 1;
 }
 .menu {
   padding: 1.5rem;
@@ -78,7 +83,6 @@ export default {
   color: $color-white;
   h1 {
     font-size: 2.25rem;
-    line-height: 1;
   }
 }
 .main {
@@ -89,6 +93,9 @@ export default {
   width: 16rem;
   background-color: $color-secondary;
   color: $color-white;
+}
+.base-pulldown {
+  margin-bottom: 0.75rem;
 }
 .controll-slider {
   margin-bottom: 0.75rem;
