@@ -25,6 +25,7 @@
         :unit-name="value.unitName"
         @updateValue="updateValue({ name, value: $event })"
       ></controll-slider>
+      <base-pulldown></base-pulldown>
     </div>
   </div>
 </template>
@@ -34,11 +35,13 @@ import { mapMutations } from 'vuex'
 
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
+import BasePulldown from '@/components/atoms/BasePulldown'
 
 export default {
   components: {
     BaseCanvas,
-    ControllSlider
+    ControllSlider,
+    BasePulldown
   },
   data() {
     return {
