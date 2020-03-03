@@ -4,7 +4,11 @@
       {{ valueOptions[currentValue] }}
     </div>
     <div class="pulldown-options" :class="{ active: showOptions }">
-      <div v-for="(option, index) in valueOptions" :key="index">
+      <div
+        v-for="(option, index) in valueOptions"
+        :key="index"
+        @click="selectOption(index)"
+      >
         {{ option }}
       </div>
     </div>
@@ -23,6 +27,10 @@ export default {
   methods: {
     toggleShowOptions() {
       this.showOptions = !this.showOptions
+    },
+    selectOption(key) {
+      this.currentValue = key
+      this.showOptions = false
     }
   }
 }
