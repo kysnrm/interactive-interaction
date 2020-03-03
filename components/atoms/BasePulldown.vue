@@ -14,6 +14,8 @@
       <div
         v-for="(option, index) in valueOptions"
         :key="index"
+        class="pulldown-options-item"
+        :class="{ active: index === currentValue }"
         @click="selectOption(index)"
       >
         {{ option }}
@@ -32,7 +34,7 @@ export default {
   data: () => {
     return {
       currentValue: 0,
-      valueOptions: ['hoge', 'fuga'],
+      valueOptions: ['hoge', 'fuga', 'piyo'],
       showOptions: false
     }
   },
@@ -49,10 +51,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// main
 .pulldown-main {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid $color-white;
+  border-radius: 0.25rem 0.25rem 0 0;
   &:hover {
     background-color: $color-gray;
     cursor: pointer;
@@ -66,12 +70,32 @@ export default {
 }
 .pulldown-icon {
   font-size: 1.5rem;
-  margin-bottom: 0.375rem;
+  margin: 0 0.25rem 0.375rem 0;
 }
+
+// options
 .pulldown-options {
+  width: 208px;
+  padding: 0.5rem 0;
   display: none;
+  position: absolute;
+  background-color: $color-gray;
+  box-shadow: 0 0.375rem 0.375rem rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 0.25rem 0.25rem;
+  z-index: 9999;
   &.open {
     display: block;
+  }
+}
+.pulldown-options-item {
+  padding: 0.5rem 0.25rem;
+  &:hover {
+    background-color: lighten($color-gray, $amount: 16%);
+    cursor: pointer;
+  }
+  &.active {
+    background-color: $color-primary;
+    color: $color-secondary;
   }
 }
 </style>
@@ -79,7 +103,7 @@ export default {
 <style lang="scss">
 .pulldown-main {
   .pulldown-icon .material-design-icon__svg {
-    transition: 0.2s;
+    transition: 0.3s;
   }
   &.open .pulldown-icon .material-design-icon__svg {
     transform: rotate(-180deg);

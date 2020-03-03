@@ -94,6 +94,9 @@ export default {
   background-color: $color-secondary;
   color: $color-white;
 }
+.base-pulldown {
+  margin-bottom: 0.75rem;
+}
 .controll-slider {
   margin-bottom: 0.75rem;
 }
