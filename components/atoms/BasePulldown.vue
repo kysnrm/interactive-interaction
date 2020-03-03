@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="pulldown-main">
+    <div class="pulldown-main" @click="toggleShowOptions">
       {{ valueOptions[currentValue] }}
     </div>
-    <div class="pulldown-options">
+    <div class="pulldown-options" :class="{ active: showOptions }">
       <div v-for="(option, index) in valueOptions" :key="index">
         {{ option }}
       </div>
@@ -16,8 +16,23 @@ export default {
   data: () => {
     return {
       currentValue: 0,
-      valueOptions: ['hoge', 'fuga']
+      valueOptions: ['hoge', 'fuga'],
+      showOptions: false
+    }
+  },
+  methods: {
+    toggleShowOptions() {
+      this.showOptions = !this.showOptions
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.pulldown-options {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+</style>
