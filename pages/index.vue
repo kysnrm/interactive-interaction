@@ -8,41 +8,22 @@
         ref="canvas"
         :width="mainWidth"
         :height="mainHeight"
-        :rect-size="rectSize"
-        :color-red="colorRed"
-        :color-green="colorGreen"
-        :blue-speed="blueSpeed"
+        :rect-size="myStore.rectSize.value"
+        :color-red="myStore.colorRed.value"
+        :color-green="myStore.colorGreen.value"
+        :blue-speed="myStore.blueSpeed.value"
       ></base-canvas>
     </div>
     <div class="controller">
       <controll-slider
-        slider-name="rectSize"
-        :min-value="10"
-        :max-value="100"
-        :value="rectSize"
-        unit-name="px"
-        @updateValue="updateRectSize"
-      ></controll-slider>
-      <controll-slider
-        slider-name="colorRed"
-        :min-value="0"
-        :max-value="255"
-        :value="colorRed"
-        @updateValue="updateColorRed"
-      ></controll-slider>
-      <controll-slider
-        slider-name="colorGreen"
-        :min-value="0"
-        :max-value="255"
-        :value="colorGreen"
-        @updateValue="updateColorGreen"
-      ></controll-slider>
-      <controll-slider
-        slider-name="blueSpeed"
-        :min-value="1"
-        :max-value="10"
-        :value="blueSpeed"
-        @updateValue="updateBlueSpeed"
+        v-for="(value, name, index) in myStore"
+        :key="index"
+        :slider-name="name"
+        :min-value="value.minValue"
+        :max-value="value.maxValue"
+        :value="value.value"
+        :unit-name="value.unitName"
+        @updateValue="updateValue({ name, value: $event })"
       ></controll-slider>
     </div>
   </div>
@@ -66,17 +47,8 @@ export default {
     }
   },
   computed: {
-    rectSize() {
-      return this.$store.state.canvasVariables.rectSize
-    },
-    colorRed() {
-      return this.$store.state.canvasVariables.colorRed
-    },
-    colorGreen() {
-      return this.$store.state.canvasVariables.colorGreen
-    },
-    blueSpeed() {
-      return this.$store.state.canvasVariables.blueSpeed
+    myStore() {
+      return this.$store.state.canvasVariables
     }
   },
   mounted() {
@@ -86,12 +58,7 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    ...mapMutations([
-      'updateRectSize',
-      'updateColorRed',
-      'updateColorGreen',
-      'updateBlueSpeed'
-    ])
+    ...mapMutations(['updateValue'])
   }
 }
 </script>
