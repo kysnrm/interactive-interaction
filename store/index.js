@@ -4,34 +4,33 @@ export const state = () => ({
       value: 50,
       minValue: 10,
       maxValue: 100,
-      unitName: 'px',
-      mutation: 'updateRectSize'
+      unitName: 'px'
     },
     colorRed: {
       value: 127,
       minValue: 0,
       maxValue: 255,
-      unitName: '',
-      mutation: 'updateColorRed'
+      unitName: ''
     },
     colorGreen: {
       value: 127,
       minValue: 0,
       maxValue: 255,
-      unitName: '',
-      mutation: 'updateColorGreen'
+      unitName: ''
     },
     blueSpeed: {
       value: 1,
       minValue: 1,
       maxValue: 10,
-      unitName: '',
-      mutation: 'updateBlueSpeed'
+      unitName: ''
     }
   }
 })
 
 export const mutations = {
+  updateValue(state, payload) {
+    state.canvasVariables[payload.name].value = payload.value
+  },
   updateRectSize(state, value) {
     state.canvasVariables.rectSize.value = value
   },
