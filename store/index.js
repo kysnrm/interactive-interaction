@@ -30,17 +30,5 @@ export const state = () => ({
 export const mutations = {
   updateValue(state, payload) {
     state.canvasVariables[payload.name].value = payload.value
-  },
-  updateRectSize(state, value) {
-    state.canvasVariables.rectSize.value = value
-  },
-  updateColorRed(state, value) {
-    state.canvasVariables.colorRed.value = value
-  },
-  updateColorGreen(state, value) {
-    state.canvasVariables.colorGreen.value = value
-  },
-  updateBlueSpeed(state, value) {
-    state.canvasVariables.blueSpeed.value = value
   }
 }
