@@ -10,7 +10,7 @@
       :percentage="culcPercentage(value, minValue, maxValue)"
       @clickBar="clickBar($event)"
       @dotMove="dotMove($event)"
-    ></base-slider>
+    />
   </div>
 </template>
 

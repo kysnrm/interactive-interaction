@@ -1,9 +1,9 @@
 <template>
   <div class="controll-pulldown">
     <div class="pulldown-name">
-      redControll
+      {{ pulldownName }}
     </div>
-    <base-pulldown />
+    <base-pulldown :value-options="valueOptions" />
   </div>
 </template>
 
@@ -13,6 +13,14 @@ import BasePulldown from '../atoms/BasePulldown'
 export default {
   components: {
     BasePulldown
+  },
+  props: {
+    pulldownName: { type: String, required: true, default: 'sliderName' },
+    valueOptions: {
+      type: Array,
+      required: true,
+      default: () => []
+    }
   }
 }
 </script>

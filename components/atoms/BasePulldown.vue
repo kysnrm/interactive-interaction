@@ -31,10 +31,16 @@ export default {
   components: {
     MenuDownIcon
   },
+  props: {
+    valueOptions: {
+      type: Array,
+      required: true,
+      default: () => []
+    }
+  },
   data: () => {
     return {
       currentValue: 0,
-      valueOptions: ['hoge', 'fuga', 'piyo'],
       showOptions: false
     }
   },
