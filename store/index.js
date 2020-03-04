@@ -108,6 +108,11 @@ export const mutations = {
   updateValue(state, payload) {
     state.canvasVariables[payload.name].value = payload.value
   },
+  updateRectValue(state, payload) {
+    state.rectVariables[payload.controllName].options[
+      payload.sliderName
+    ].value = payload.value
+  },
   updateCurrentValue(state, payload) {
     state.rectVariables[payload.name].currentValue = payload.value
   }
