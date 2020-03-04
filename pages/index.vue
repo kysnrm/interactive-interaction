@@ -17,7 +17,7 @@
     <div class="controller">
       <controll-slider
         v-for="(value, name, index) in myStore"
-        :key="index"
+        :key="index + 10"
         :slider-name="name"
         :min-value="value.minValue"
         :max-value="value.maxValue"
@@ -25,17 +25,16 @@
         :unit-name="value.unitName"
         @updateValue="updateValue({ name, value: $event })"
       />
-      <controll-wrapper
-        :controll-type="rectVariables.rectSize.type"
-        slider-name="rectSize"
-        :slider-variables="rectVariables.rectSize"
-      />
-      <controll-wrapper
-        :controll-type="rectVariables.colorRed.type"
-        :controll-options="rectVariables.colorRed.options"
-        :current-controller="currentController"
-        @selectOption="selectOption"
-      />
+      <div v-for="(value, name, index) in rectVariables" :key="index">
+        <controll-wrapper
+          :controll-type="value.type"
+          :controll-name="name"
+          :slider-variables="value.options"
+          :controll-options="value.options"
+          :current-controller="currentController"
+          @selectOption="selectOption"
+        />
+      </div>
     </div>
   </div>
 </template>

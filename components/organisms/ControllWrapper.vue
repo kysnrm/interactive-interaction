@@ -2,7 +2,7 @@
   <div class="controll-wrapper">
     <div v-if="controllType === 'slider'">
       <controll-slider
-        :slider-name="sliderName"
+        :slider-name="controllName"
         :min-value="sliderVariables.minValue"
         :max-value="sliderVariables.maxValue"
         :value="sliderVariables.value"
@@ -11,7 +11,7 @@
     </div>
     <div v-if="controllType === 'pulldown'">
       <controll-pulldown
-        pulldown-name="colorRed"
+        :pulldown-name="controllName"
         :current-value="currentController"
         :value-options="controllOptionKeys"
         @selectOption="selectOption"
@@ -47,7 +47,7 @@ export default {
   },
   props: {
     controllType: { type: String, required: true, default: 'slider' },
-    sliderName: { type: String, required: false, default: 'sliderName' },
+    controllName: { type: String, required: false, default: 'sliderName' },
     sliderVariables: {
       type: Object,
       required: false,

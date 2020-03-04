@@ -28,10 +28,12 @@ export const state = () => ({
   rectVariables: {
     rectSize: {
       type: 'slider',
-      value: 50,
-      minValue: 10,
-      maxValue: 100,
-      unitName: 'px'
+      options: {
+        value: 50,
+        minValue: 10,
+        maxValue: 100,
+        unitName: 'px'
+      }
     },
     colorRed: {
       type: 'pulldown',
