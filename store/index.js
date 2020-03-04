@@ -29,7 +29,7 @@ export const state = () => ({
           }
         }
       },
-      currentValue: 0
+      currentOption: 0
     },
     colorGreen: {
       type: 'pulldown',
@@ -51,7 +51,7 @@ export const state = () => ({
           }
         }
       },
-      currentValue: 0
+      currentOption: 0
     },
     colorBlue: {
       type: 'pulldown',
@@ -73,7 +73,7 @@ export const state = () => ({
           }
         }
       },
-      currentValue: 0
+      currentOption: 0
     }
   }
 })
@@ -87,7 +87,7 @@ export const mutations = {
       payload.sliderName
     ].value = payload.value
   },
-  updateCurrentValue(state, payload) {
-    state.rectVariables[payload.name].currentValue = payload.value
+  updateOption(state, payload) {
+    state.rectVariables[payload.name].currentOption = payload.value
   }
 }

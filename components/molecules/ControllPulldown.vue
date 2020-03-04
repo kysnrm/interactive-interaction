@@ -4,7 +4,7 @@
       {{ pulldownName }}
     </div>
     <base-pulldown
-      :current-value="currentValue"
+      :current-option="currentOption"
       :value-options="valueOptions"
       @selectOption="selectOption"
     />
@@ -20,7 +20,7 @@ export default {
   },
   props: {
     pulldownName: { type: String, required: true, default: 'sliderName' },
-    currentValue: { type: Number, required: true, default: 0 },
+    currentOption: { type: Number, required: true, default: 0 },
     valueOptions: {
       type: Array,
       required: true,

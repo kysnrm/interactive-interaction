@@ -22,10 +22,10 @@ export default {
     },
     switchColor(key, ellapsedTIme) {
       const color = this.rectVariables[key]
-      if (color.currentValue === 0) {
+      if (color.currentOption === 0) {
         return color.options.static.value.value
       }
-      if (color.currentValue === 1) {
+      if (color.currentOption === 1) {
         return this.sineWave(ellapsedTIme, color.options.sineWave.speed.value)
       }
     },

@@ -6,7 +6,7 @@
       @click="toggleShowOptions"
     >
       <div class="pulldown-current_value">
-        {{ valueOptions[currentValue] }}
+        {{ valueOptions[currentOption] }}
       </div>
       <menu-down-icon class="pulldown-icon" />
     </div>
@@ -15,7 +15,7 @@
         v-for="(option, index) in valueOptions"
         :key="index"
         class="pulldown-options-item"
-        :class="{ active: index === currentValue }"
+        :class="{ active: index === currentOption }"
         @click="selectOption(index)"
       >
         {{ option }}
@@ -32,7 +32,7 @@ export default {
     MenuDownIcon
   },
   props: {
-    currentValue: { type: Number, required: true, default: 0 },
+    currentOption: { type: Number, required: true, default: 0 },
     valueOptions: {
       type: Array,
       required: true,

@@ -12,8 +12,7 @@
           :controll-type="value.type"
           :controll-name="name"
           :controll-options="value.options"
-          :current-controller="value.currentValue"
-          @selectOption="updateCurrentValue({ name, value: $event })"
+          :current-controller="value.currentOption"
         />
       </div>
     </div>
@@ -21,8 +20,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 import 'vue-material-design-icons/styles.css'
 
 import BaseCanvas from '@/components/atoms/BaseCanvas'
@@ -49,12 +46,6 @@ export default {
     const mainArea = this.$refs.main
     this.mainWidth = mainArea.offsetWidth
     this.mainHeight = mainArea.offsetHeight
-  },
-  methods: {
-    ...mapMutations(['updateCurrentValue']),
-    selectOption(key) {
-      this.currentController = key
-    }
   }
 }
 </script>
