@@ -4,15 +4,7 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div ref="main" class="main">
-      <base-canvas
-        ref="canvas"
-        :width="mainWidth"
-        :height="mainHeight"
-        :rect-size="myStore.rectSize.value"
-        :color-red="myStore.colorRed.value"
-        :color-green="myStore.colorGreen.value"
-        :blue-speed="myStore.blueSpeed.value"
-      />
+      <base-canvas ref="canvas" :width="mainWidth" :height="mainHeight" />
     </div>
     <div class="controller">
       <div v-for="(value, name, index) in rectVariables" :key="index">
@@ -44,15 +36,10 @@ export default {
   data() {
     return {
       mainWidth: 0,
-      mainHeight: 0,
-      currentController: 0,
-      controllType: 'pulldown'
+      mainHeight: 0
     }
   },
   computed: {
-    myStore() {
-      return this.$store.state.canvasVariables
-    },
     rectVariables() {
       return this.$store.state.rectVariables
     }
@@ -64,7 +51,7 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    ...mapMutations(['updateValue', 'updateCurrentValue']),
+    ...mapMutations(['updateCurrentValue']),
     selectOption(key) {
       this.currentController = key
     }

@@ -6,12 +6,6 @@
 
 <script>
 export default {
-  props: {
-    rectSize: { type: Number, required: true, default: 50 },
-    colorRed: { type: Number, required: true, default: 127 },
-    colorGreen: { type: Number, required: true, default: 127 },
-    blueSpeed: { type: Number, required: true, default: 1 }
-  },
   computed: {
     rectVariables() {
       return this.$store.state.rectVariables
