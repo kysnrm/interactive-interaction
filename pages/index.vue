@@ -29,6 +29,7 @@
         :unit-name="value.unitName"
         @updateValue="updateValue({ name, value: $event })"
       />
+      <controll-wrapper />
     </div>
   </div>
 </template>
@@ -37,15 +38,18 @@
 import { mapMutations } from 'vuex'
 
 import 'vue-material-design-icons/styles.css'
+
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
 import ControllPulldown from '@/components/molecules/ControllPulldown'
+import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
     BaseCanvas,
     ControllSlider,
-    ControllPulldown
+    ControllPulldown,
+    ControllWrapper
   },
   data() {
     return {
