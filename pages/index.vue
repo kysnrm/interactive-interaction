@@ -29,10 +29,9 @@
         <controll-wrapper
           :controll-type="value.type"
           :controll-name="name"
-          :slider-variables="value.options"
           :controll-options="value.options"
-          :current-controller="currentController"
-          @selectOption="selectOption"
+          :current-controller="value.currentValue"
+          @selectOption="updateCurrentValue({ name, value: $event })"
         />
       </div>
     </div>
@@ -77,7 +76,7 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    ...mapMutations(['updateValue']),
+    ...mapMutations(['updateValue', 'updateCurrentValue']),
     selectOption(key) {
       this.currentController = key
     }

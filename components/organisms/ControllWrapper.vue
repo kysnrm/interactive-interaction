@@ -3,10 +3,10 @@
     <div v-if="controllType === 'slider'">
       <controll-slider
         :slider-name="controllName"
-        :min-value="sliderVariables.minValue"
-        :max-value="sliderVariables.maxValue"
-        :value="sliderVariables.value"
-        :unit-name="sliderVariables.unitName"
+        :min-value="controllOptions.minValue"
+        :max-value="controllOptions.maxValue"
+        :value="controllOptions.value"
+        :unit-name="controllOptions.unitName"
       />
     </div>
     <div v-if="controllType === 'pulldown'">
@@ -48,11 +48,6 @@ export default {
   props: {
     controllType: { type: String, required: true, default: 'slider' },
     controllName: { type: String, required: false, default: 'sliderName' },
-    sliderVariables: {
-      type: Object,
-      required: false,
-      default: () => {}
-    },
     controllOptions: {
       type: Object,
       required: false,

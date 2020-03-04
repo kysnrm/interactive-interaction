@@ -54,7 +54,8 @@ export const state = () => ({
             unitName: ''
           }
         }
-      }
+      },
+      currentValue: 0
     },
     colorGreen: {
       type: 'pulldown',
@@ -75,7 +76,8 @@ export const state = () => ({
             unitName: ''
           }
         }
-      }
+      },
+      currentValue: 0
     },
     colorBlue: {
       type: 'pulldown',
@@ -96,7 +98,8 @@ export const state = () => ({
             unitName: ''
           }
         }
-      }
+      },
+      currentValue: 0
     }
   }
 })
@@ -104,5 +107,8 @@ export const state = () => ({
 export const mutations = {
   updateValue(state, payload) {
     state.canvasVariables[payload.name].value = payload.value
+  },
+  updateCurrentValue(state, payload) {
+    state.rectVariables[payload.name].currentValue = payload.value
   }
 }
