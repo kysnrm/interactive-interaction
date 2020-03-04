@@ -32,6 +32,7 @@ export default {
     MenuDownIcon
   },
   props: {
+    currentValue: { type: Number, required: true, default: 0 },
     valueOptions: {
       type: Array,
       required: true,
@@ -40,7 +41,6 @@ export default {
   },
   data: () => {
     return {
-      currentValue: 0,
       showOptions: false
     }
   },
@@ -49,7 +49,7 @@ export default {
       this.showOptions = !this.showOptions
     },
     selectOption(key) {
-      this.currentValue = key
+      this.$emit('selectOption', key)
       this.showOptions = false
     }
   }

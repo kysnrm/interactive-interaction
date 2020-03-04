@@ -15,10 +15,6 @@
       />
     </div>
     <div class="controller">
-      <controll-pulldown
-        pulldown-name="redValue"
-        :value-options="['hoge', 'fuga', 'piyo']"
-      />
       <controll-slider
         v-for="(value, name, index) in myStore"
         :key="index"
@@ -29,7 +25,12 @@
         :unit-name="value.unitName"
         @updateValue="updateValue({ name, value: $event })"
       />
-      <controll-wrapper />
+      <controll-wrapper
+        :controll-type="rectVariables.colorRed.type"
+        :controll-options="rectVariables.colorRed.options"
+        :current-controller="currentController"
+        @selectOption="selectOption"
+      />
     </div>
   </div>
 </template>
@@ -41,25 +42,28 @@ import 'vue-material-design-icons/styles.css'
 
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
-import ControllPulldown from '@/components/molecules/ControllPulldown'
 import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
     BaseCanvas,
     ControllSlider,
-    ControllPulldown,
     ControllWrapper
   },
   data() {
     return {
       mainWidth: 0,
-      mainHeight: 0
+      mainHeight: 0,
+      currentController: 0,
+      controllType: 'pulldown'
     }
   },
   computed: {
     myStore() {
       return this.$store.state.canvasVariables
+    },
+    rectVariables() {
+      return this.$store.state.rectVariables
     }
   },
   mounted() {
@@ -69,7 +73,10 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    ...mapMutations(['updateValue'])
+    ...mapMutations(['updateValue']),
+    selectOption(key) {
+      this.currentController = key
+    }
   }
 }
 </script>
