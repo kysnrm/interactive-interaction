@@ -13,9 +13,9 @@
     <div v-if="controllType === 'pulldown'" class="wrapper-pulldown">
       <controll-pulldown
         :pulldown-name="controllName"
-        :current-value="currentController"
+        :current-option="currentController"
         :value-options="controllOptionKeys"
-        @selectOption="selectOption"
+        @selectOption="updateOption({ name: controllName, value: $event })"
       />
       <div
         v-for="(option, optionName, optionIndex) in controllOptions"
@@ -75,7 +75,11 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateSliderValue', 'updatePulldownSliderValue']),
+    ...mapMutations([
+      'updateOption',
+      'updateSliderValue',
+      'updatePulldownSliderValue'
+    ]),
     selectOption(key) {
       this.$emit('selectOption', key)
     }

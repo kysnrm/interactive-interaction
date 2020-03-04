@@ -4,34 +4,15 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div ref="main" class="main">
-      <base-canvas
-        ref="canvas"
-        :width="mainWidth"
-        :height="mainHeight"
-        :rect-size="myStore.rectSize.value"
-        :color-red="myStore.colorRed.value"
-        :color-green="myStore.colorGreen.value"
-        :blue-speed="myStore.blueSpeed.value"
-      />
+      <base-canvas ref="canvas" :width="mainWidth" :height="mainHeight" />
     </div>
     <div class="controller">
-      <controll-slider
-        v-for="(value, name, index) in myStore"
-        :key="index + 10"
-        :slider-name="name"
-        :min-value="value.minValue"
-        :max-value="value.maxValue"
-        :value="value.value"
-        :unit-name="value.unitName"
-        @updateValue="updateValue({ name, value: $event })"
-      />
       <div v-for="(value, name, index) in rectVariables" :key="index">
         <controll-wrapper
           :controll-type="value.type"
           :controll-name="name"
           :controll-options="value.options"
-          :current-controller="value.currentValue"
-          @selectOption="updateCurrentValue({ name, value: $event })"
+          :current-controller="value.currentOption"
         />
       </div>
     </div>
@@ -39,32 +20,23 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 import 'vue-material-design-icons/styles.css'
 
 import BaseCanvas from '@/components/atoms/BaseCanvas'
-import ControllSlider from '@/components/molecules/ControllSlider'
 import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
     BaseCanvas,
-    ControllSlider,
     ControllWrapper
   },
   data() {
     return {
       mainWidth: 0,
-      mainHeight: 0,
-      currentController: 0,
-      controllType: 'pulldown'
+      mainHeight: 0
     }
   },
   computed: {
-    myStore() {
-      return this.$store.state.canvasVariables
-    },
     rectVariables() {
       return this.$store.state.rectVariables
     }
@@ -74,12 +46,6 @@ export default {
     const mainArea = this.$refs.main
     this.mainWidth = mainArea.offsetWidth
     this.mainHeight = mainArea.offsetHeight
-  },
-  methods: {
-    ...mapMutations(['updateValue', 'updateCurrentValue']),
-    selectOption(key) {
-      this.currentController = key
-    }
   }
 }
 </script>

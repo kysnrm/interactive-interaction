@@ -6,11 +6,10 @@
 
 <script>
 export default {
-  props: {
-    rectSize: { type: Number, required: true, default: 50 },
-    colorRed: { type: Number, required: true, default: 127 },
-    colorGreen: { type: Number, required: true, default: 127 },
-    blueSpeed: { type: Number, required: true, default: 1 }
+  computed: {
+    rectVariables() {
+      return this.$store.state.rectVariables
+    }
   },
   mounted() {
     this.ctx = this.$el.getContext('2d')
@@ -18,13 +17,28 @@ export default {
     this.render()
   },
   methods: {
+    sineWave(ellapsedTime, speed) {
+      return Math.abs(Math.sin(ellapsedTime * speed) * 255)
+    },
+    switchColor(key, ellapsedTIme) {
+      const color = this.rectVariables[key]
+      if (color.currentOption === 0) {
+        return color.options.static.value.value
+      }
+      if (color.currentOption === 1) {
+        return this.sineWave(ellapsedTIme, color.options.sineWave.speed.value)
+      }
+    },
     render() {
       this.ctx.clearRect(0, 0, 100, 100)
       const nowTime = Date.now()
       const ellapsedTime = (nowTime - this.startTime) / 1000
-      const blue = Math.abs(Math.sin(ellapsedTime * this.blueSpeed) * 255)
-      this.ctx.fillStyle = `rgb(${this.colorRed}, ${this.colorGreen}, ${blue})`
-      this.ctx.fillRect(0, 0, this.rectSize, this.rectSize)
+      const red = this.switchColor('colorRed', ellapsedTime)
+      const green = this.switchColor('colorGreen', ellapsedTime)
+      const blue = this.switchColor('colorBlue', ellapsedTime)
+      const rectSize = this.rectVariables.rectSize.options.value
+      this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
+      this.ctx.fillRect(0, 0, rectSize, rectSize)
       requestAnimationFrame(this.render)
     }
   }
