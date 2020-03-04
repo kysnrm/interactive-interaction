@@ -26,6 +26,11 @@
         @updateValue="updateValue({ name, value: $event })"
       />
       <controll-wrapper
+        :controll-type="rectVariables.rectSize.type"
+        slider-name="rectSize"
+        :slider-variables="rectVariables.rectSize"
+      />
+      <controll-wrapper
         :controll-type="rectVariables.colorRed.type"
         :controll-options="rectVariables.colorRed.options"
         :current-controller="currentController"
