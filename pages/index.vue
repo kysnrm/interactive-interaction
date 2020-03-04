@@ -12,10 +12,13 @@
         :color-red="myStore.colorRed.value"
         :color-green="myStore.colorGreen.value"
         :blue-speed="myStore.blueSpeed.value"
-      ></base-canvas>
+      />
     </div>
     <div class="controller">
-      <base-pulldown />
+      <controll-pulldown
+        pulldown-name="redValue"
+        :value-options="['hoge', 'fuga', 'piyo']"
+      />
       <controll-slider
         v-for="(value, name, index) in myStore"
         :key="index"
@@ -25,7 +28,7 @@
         :value="value.value"
         :unit-name="value.unitName"
         @updateValue="updateValue({ name, value: $event })"
-      ></controll-slider>
+      />
     </div>
   </div>
 </template>
@@ -36,13 +39,13 @@ import { mapMutations } from 'vuex'
 import 'vue-material-design-icons/styles.css'
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
-import BasePulldown from '@/components/atoms/BasePulldown'
+import ControllPulldown from '@/components/molecules/ControllPulldown'
 
 export default {
   components: {
     BaseCanvas,
     ControllSlider,
-    BasePulldown
+    ControllPulldown
   },
   data() {
     return {
