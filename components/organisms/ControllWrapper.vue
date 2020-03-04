@@ -7,6 +7,7 @@
         :max-value="controllOptions.maxValue"
         :value="controllOptions.value"
         :unit-name="controllOptions.unitName"
+        @updateValue="updateSliderValue({ name: controllName, value: $event })"
       />
     </div>
     <div v-if="controllType === 'pulldown'" class="wrapper-pulldown">
@@ -29,6 +30,14 @@
             :max-value="value.maxValue"
             :value="value.value"
             :unit-name="value.unitName"
+            @updateValue="
+              updatePulldownSliderValue({
+                controllName: controllName,
+                optionName: optionName,
+                sliderName: name,
+                value: $event
+              })
+            "
           />
         </div>
       </div>
@@ -37,6 +46,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import ControllPulldown from '../molecules/ControllPulldown'
 import ControllSlider from '../molecules/ControllSlider'
 
@@ -64,6 +75,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['updateSliderValue', 'updatePulldownSliderValue']),
     selectOption(key) {
       this.$emit('selectOption', key)
     }
