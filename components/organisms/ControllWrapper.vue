@@ -1,6 +1,6 @@
 <template>
   <div class="controll-wrapper">
-    <div v-if="controllType === 'slider'">
+    <div v-if="controllType === 'slider'" class="wrapper-slider">
       <controll-slider
         :slider-name="controllName"
         :min-value="controllOptions.minValue"
@@ -9,7 +9,7 @@
         :unit-name="controllOptions.unitName"
       />
     </div>
-    <div v-if="controllType === 'pulldown'">
+    <div v-if="controllType === 'pulldown'" class="wrapper-pulldown">
       <controll-pulldown
         :pulldown-name="controllName"
         :current-value="currentController"
@@ -72,7 +72,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.controll-wrapper {
-  border-bottom: 1px solid $color-white;
+.wrapper-slider {
+  padding-bottom: 1rem;
+}
+.wrapper-pulldown {
+  padding: 0.5rem 0 1rem 0;
+  border-top: 1px solid $color-white;
 }
 </style>
