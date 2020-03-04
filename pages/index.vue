@@ -16,6 +16,7 @@
     </div>
     <div class="controller">
       <base-pulldown />
+      <controll-pulldown />
       <controll-slider
         v-for="(value, name, index) in myStore"
         :key="index"
@@ -37,12 +38,14 @@ import 'vue-material-design-icons/styles.css'
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
 import BasePulldown from '@/components/atoms/BasePulldown'
+import ControllPulldown from '@/components/molecules/ControllPulldown'
 
 export default {
   components: {
     BaseCanvas,
     ControllSlider,
-    BasePulldown
+    BasePulldown,
+    ControllPulldown
   },
   data() {
     return {

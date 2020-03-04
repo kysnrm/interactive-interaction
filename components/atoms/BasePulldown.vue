@@ -52,6 +52,9 @@ export default {
 
 <style lang="scss" scoped>
 // main
+.base-pulldown {
+  position: relative;
+}
 .pulldown-main {
   display: flex;
   justify-content: space-between;
@@ -75,7 +78,7 @@ export default {
 
 // options
 .pulldown-options {
-  width: 208px;
+  width: 100%;
   padding: 0.5rem 0;
   display: none;
   position: absolute;
