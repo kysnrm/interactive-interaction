@@ -39,7 +39,7 @@ export const state = () => ({
       type: 'pulldown',
       options: {
         static: {
-          staticValue: {
+          value: {
             value: 127,
             minValue: 0,
             maxValue: 255,
@@ -47,7 +47,7 @@ export const state = () => ({
           }
         },
         sineWave: {
-          sineSpeed: {
+          speed: {
             value: 1,
             minValue: 1,
             maxValue: 10,
@@ -61,7 +61,7 @@ export const state = () => ({
       type: 'pulldown',
       options: {
         static: {
-          staticValue: {
+          value: {
             value: 127,
             minValue: 0,
             maxValue: 255,
@@ -69,7 +69,7 @@ export const state = () => ({
           }
         },
         sineWave: {
-          sineSpeed: {
+          speed: {
             value: 1,
             minValue: 1,
             maxValue: 10,
@@ -83,7 +83,7 @@ export const state = () => ({
       type: 'pulldown',
       options: {
         static: {
-          staticValue: {
+          value: {
             value: 127,
             minValue: 0,
             maxValue: 255,
@@ -91,7 +91,7 @@ export const state = () => ({
           }
         },
         sineWave: {
-          sineSpeed: {
+          speed: {
             value: 1,
             minValue: 1,
             maxValue: 10,
@@ -108,8 +108,11 @@ export const mutations = {
   updateValue(state, payload) {
     state.canvasVariables[payload.name].value = payload.value
   },
-  updateRectValue(state, payload) {
-    state.rectVariables[payload.controllName].options[
+  updateSliderValue(state, payload) {
+    state.rectVariables[payload.name].options.value = payload.value
+  },
+  updatePulldownSliderValue(state, payload) {
+    state.rectVariables[payload.controllName].options[payload.optionName][
       payload.sliderName
     ].value = payload.value
   },
