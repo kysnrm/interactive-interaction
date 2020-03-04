@@ -12,6 +12,11 @@ export default {
     colorGreen: { type: Number, required: true, default: 127 },
     blueSpeed: { type: Number, required: true, default: 1 }
   },
+  computed: {
+    rectVariables() {
+      return this.$store.state.rectVariables
+    }
+  },
   mounted() {
     this.ctx = this.$el.getContext('2d')
     this.startTime = Date.now()
