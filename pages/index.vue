@@ -15,16 +15,6 @@
       />
     </div>
     <div class="controller">
-      <controll-slider
-        v-for="(value, name, index) in myStore"
-        :key="index + 10"
-        :slider-name="name"
-        :min-value="value.minValue"
-        :max-value="value.maxValue"
-        :value="value.value"
-        :unit-name="value.unitName"
-        @updateValue="updateValue({ name, value: $event })"
-      />
       <div v-for="(value, name, index) in rectVariables" :key="index">
         <controll-wrapper
           :controll-type="value.type"
@@ -44,13 +34,11 @@ import { mapMutations } from 'vuex'
 import 'vue-material-design-icons/styles.css'
 
 import BaseCanvas from '@/components/atoms/BaseCanvas'
-import ControllSlider from '@/components/molecules/ControllSlider'
 import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
     BaseCanvas,
-    ControllSlider,
     ControllWrapper
   },
   data() {
