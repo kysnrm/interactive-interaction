@@ -1,0 +1,82 @@
+<template>
+  <div class="controll-wrapper">
+    <div v-if="controllType === 'slider'" class="wrapper-slider">
+      <controll-slider
+        :slider-name="controllName"
+        :min-value="controllOptions.minValue"
+        :max-value="controllOptions.maxValue"
+        :value="controllOptions.value"
+        :unit-name="controllOptions.unitName"
+      />
+    </div>
+    <div v-if="controllType === 'pulldown'" class="wrapper-pulldown">
+      <controll-pulldown
+        :pulldown-name="controllName"
+        :current-value="currentController"
+        :value-options="controllOptionKeys"
+        @selectOption="selectOption"
+      />
+      <div
+        v-for="(option, optionName, optionIndex) in controllOptions"
+        :key="optionIndex"
+      >
+        <div v-if="currentController === optionIndex">
+          <controll-slider
+            v-for="(value, name, index) in option"
+            :key="index"
+            :slider-name="name"
+            :min-value="value.minValue"
+            :max-value="value.maxValue"
+            :value="value.value"
+            :unit-name="value.unitName"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import ControllPulldown from '../molecules/ControllPulldown'
+import ControllSlider from '../molecules/ControllSlider'
+
+export default {
+  components: {
+    ControllPulldown,
+    ControllSlider
+  },
+  props: {
+    controllType: { type: String, required: true, default: 'slider' },
+    controllName: { type: String, required: false, default: 'sliderName' },
+    controllOptions: {
+      type: Object,
+      required: false,
+      default: () => {}
+    },
+    currentController: { type: Number, required: false, default: 0 }
+  },
+  computed: {
+    controllOptionKeys() {
+      if (this.controllType === 'slider') {
+        return
+      }
+      return Object.keys(this.controllOptions)
+    }
+  },
+  methods: {
+    selectOption(key) {
+      this.$emit('selectOption', key)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.wrapper-slider {
+  padding-bottom: 1rem;
+}
+.wrapper-pulldown {
+  padding: 0.5rem 0 1rem 0;
+  border-top: 1px solid $color-white;
+}
+</style>

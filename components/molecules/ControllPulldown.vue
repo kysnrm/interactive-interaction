@@ -3,7 +3,11 @@
     <div class="pulldown-name">
       {{ pulldownName }}
     </div>
-    <base-pulldown :value-options="valueOptions" />
+    <base-pulldown
+      :current-value="currentValue"
+      :value-options="valueOptions"
+      @selectOption="selectOption"
+    />
   </div>
 </template>
 
@@ -16,10 +20,16 @@ export default {
   },
   props: {
     pulldownName: { type: String, required: true, default: 'sliderName' },
+    currentValue: { type: Number, required: true, default: 0 },
     valueOptions: {
       type: Array,
       required: true,
       default: () => []
+    }
+  },
+  methods: {
+    selectOption(key) {
+      this.$emit('selectOption', key)
     }
   }
 }

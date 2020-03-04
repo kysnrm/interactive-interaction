@@ -15,13 +15,9 @@
       />
     </div>
     <div class="controller">
-      <controll-pulldown
-        pulldown-name="redValue"
-        :value-options="['hoge', 'fuga', 'piyo']"
-      />
       <controll-slider
         v-for="(value, name, index) in myStore"
-        :key="index"
+        :key="index + 10"
         :slider-name="name"
         :min-value="value.minValue"
         :max-value="value.maxValue"
@@ -29,6 +25,15 @@
         :unit-name="value.unitName"
         @updateValue="updateValue({ name, value: $event })"
       />
+      <div v-for="(value, name, index) in rectVariables" :key="index">
+        <controll-wrapper
+          :controll-type="value.type"
+          :controll-name="name"
+          :controll-options="value.options"
+          :current-controller="value.currentValue"
+          @selectOption="updateCurrentValue({ name, value: $event })"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -37,25 +42,31 @@
 import { mapMutations } from 'vuex'
 
 import 'vue-material-design-icons/styles.css'
+
 import BaseCanvas from '@/components/atoms/BaseCanvas'
 import ControllSlider from '@/components/molecules/ControllSlider'
-import ControllPulldown from '@/components/molecules/ControllPulldown'
+import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
     BaseCanvas,
     ControllSlider,
-    ControllPulldown
+    ControllWrapper
   },
   data() {
     return {
       mainWidth: 0,
-      mainHeight: 0
+      mainHeight: 0,
+      currentController: 0,
+      controllType: 'pulldown'
     }
   },
   computed: {
     myStore() {
       return this.$store.state.canvasVariables
+    },
+    rectVariables() {
+      return this.$store.state.rectVariables
     }
   },
   mounted() {
@@ -65,7 +76,10 @@ export default {
     this.mainHeight = mainArea.offsetHeight
   },
   methods: {
-    ...mapMutations(['updateValue'])
+    ...mapMutations(['updateValue', 'updateCurrentValue']),
+    selectOption(key) {
+      this.currentController = key
+    }
   }
 }
 </script>
@@ -96,11 +110,5 @@ export default {
   width: 16rem;
   background-color: $color-secondary;
   color: $color-white;
-}
-.base-pulldown {
-  margin-bottom: 0.75rem;
-}
-.controll-slider {
-  margin-bottom: 0.75rem;
 }
 </style>
