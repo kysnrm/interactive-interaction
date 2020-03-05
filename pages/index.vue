@@ -4,7 +4,13 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div ref="main" class="main">
-      <sketch-prism ref="canvas" :width="500" :height="500" />
+      <sketch-prism
+        ref="canvas"
+        :width="mainWidth"
+        :height="mainHeight"
+        :x-length="xLength"
+        :y-length="yLength"
+      />
     </div>
     <div class="controller">
       <div v-for="(value, name, index) in prismVariables" :key="index">
@@ -21,7 +27,6 @@
 
 <script>
 import 'vue-material-design-icons/styles.css'
-import { mapMutations } from 'vuex'
 
 // import BaseCanvas from '@/components/atoms/BaseCanvas'
 import SketchPrism from '@/components/sketch/SketchPrism'
@@ -56,23 +61,6 @@ export default {
     this.mainHeight = mainArea.offsetHeight
     this.xLength = Math.floor(this.mainWidth / 50) + 1
     this.yLength = Math.floor(this.mainHeight / 50) + 1
-    // prismRects に rect を配置する
-    // for (let i = 0; i < this.xLength * this.yLength; i++) {
-    //   const x = (i % this.xLength) * 50
-    //   const y = Math.floor(i / this.xLength) * 50
-    //   const rect = {
-    //     position: { x, y },
-    //     color: {
-    //       colorRed: 0,
-    //       colorGreen: 0,
-    //       colorBlue: 0
-    //     }
-    //   }
-    //   this.addRect({ index: i, rect })
-    // }
-  },
-  methods: {
-    ...mapMutations(['addRect'])
   }
 }
 </script>

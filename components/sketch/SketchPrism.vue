@@ -8,10 +8,15 @@
 import { mapMutations } from 'vuex'
 
 export default {
+  props: {
+    xLength: { type: Number, required: true, default: 10 },
+    yLength: { type: Number, required: true, default: 10 }
+  },
   data: () => {
     return {
       startTime: 0,
       mousePosition: { x: 0, y: 0 },
+      canvasSize: { width: 500, height: 500 },
       prismRects: []
     }
   },
@@ -19,15 +24,8 @@ export default {
     rectVariables() {
       return this.$store.state.rectVariables
     },
-    // prismRects() {
-    //   return this.$store.state.prismRects
-    // },
     prismVariables() {
       return this.$store.state.prismVariables
-    },
-    canvasSize() {
-      const rect = this.$el.getBoundingClientRect()
-      return { width: rect.width, height: rect.height }
     }
   },
   mounted() {
@@ -42,20 +40,21 @@ export default {
       },
       false
     )
-    for (let i = 0; i < 100; i++) {
-      const x = (i % 10) * 50
-      const y = Math.floor(i / 10) * 50
-      const rect = {
-        position: { x, y },
-        color: {
-          colorRed: 0,
-          colorGreen: 0,
-          colorBlue: 0
+    setTimeout(() => {
+      for (let i = 0; i < this.xLength * this.yLength; i++) {
+        const x = (i % this.xLength) * 50
+        const y = Math.floor(i / this.xLength) * 50
+        const rect = {
+          position: { x, y },
+          color: {
+            colorRed: 0,
+            colorGreen: 0,
+            colorBlue: 0
+          }
         }
+        this.prismRects[i] = rect
       }
-      this.prismRects[i] = rect
-      console.log(rect)
-    }
+    })
     this.render()
   },
   methods: {

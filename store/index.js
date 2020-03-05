@@ -89,13 +89,33 @@ export const state = () => ({
             unitName: ''
           }
         },
-        xDistance: {},
-        yDistance: {},
+        xDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        yDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
         sineWave: {
           speed: {
             value: 1,
             minValue: 1,
             maxValue: 10,
+            unitName: ''
+          },
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
             unitName: ''
           }
         }
@@ -113,13 +133,33 @@ export const state = () => ({
             unitName: ''
           }
         },
-        xDistance: {},
-        yDistance: {},
+        xDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        yDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
         sineWave: {
           speed: {
             value: 1,
             minValue: 1,
             maxValue: 10,
+            unitName: ''
+          },
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
             unitName: ''
           }
         }
@@ -137,13 +177,33 @@ export const state = () => ({
             unitName: ''
           }
         },
-        xDistance: {},
-        yDistance: {},
+        xDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        yDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
         sineWave: {
           speed: {
             value: 1,
             minValue: 1,
             maxValue: 10,
+            unitName: ''
+          },
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
             unitName: ''
           }
         }
