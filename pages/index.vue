@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div class="menu">
+    <!-- <div class="menu">
       <h1>Interactive Interaction Design</h1>
-    </div>
+    </div> -->
     <div ref="main" class="main">
       <sketch-prism
         ref="canvas"
@@ -91,5 +91,8 @@ export default {
   width: 16rem;
   background-color: $color-secondary;
   color: $color-white;
+}
+.controll-wrapper {
+  margin-bottom: 1rem;
 }
 </style>

@@ -88,11 +88,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper-slider {
-  padding-bottom: 1rem;
-}
 .wrapper-pulldown {
-  padding: 0.5rem 0 1rem 0;
+  padding-top: 0.5rem;
   border-top: 1px solid $color-white;
+  .controll-slider {
+    margin-bottom: 1rem;
+  }
+}
+.controll-pulldown {
+  margin-bottom: 1rem;
 }
 </style>

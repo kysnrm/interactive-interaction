@@ -63,6 +63,9 @@ export default {
   height: 6px;
   background-color: $color-gray;
   border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .bar-left {
   height: 100%;
@@ -78,5 +81,8 @@ export default {
   position: relative;
   top: -11px;
   box-shadow: 0 0 0.375rem rgba(0, 0, 0, 0.3);
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>
