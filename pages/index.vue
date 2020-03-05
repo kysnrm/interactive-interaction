@@ -4,7 +4,7 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div ref="main" class="main">
-      <base-canvas ref="canvas" :width="mainWidth" :height="mainHeight" />
+      <sketch-prism ref="canvas" :width="mainWidth" :height="mainHeight" />
     </div>
     <div class="controller">
       <div v-for="(value, name, index) in rectVariables" :key="index">
@@ -22,12 +22,14 @@
 <script>
 import 'vue-material-design-icons/styles.css'
 
-import BaseCanvas from '@/components/atoms/BaseCanvas'
+// import BaseCanvas from '@/components/atoms/BaseCanvas'
+import SketchPrism from '@/components/sketch/SketchPrism'
 import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
-    BaseCanvas,
+    // BaseCanvas,
+    SketchPrism,
     ControllWrapper
   },
   data() {
