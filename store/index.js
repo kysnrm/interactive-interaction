@@ -75,19 +75,178 @@ export const state = () => ({
       },
       currentOption: 0
     }
+  },
+  prismRects: [],
+  prismVariables: {
+    spreadingSpeed: {
+      type: 'slider',
+      options: {
+        value: 8,
+        minValue: 1,
+        maxValue: 32,
+        unitName: ''
+      }
+    },
+    spreadingDelay: {
+      type: 'slider',
+      options: {
+        value: 20,
+        minValue: 0,
+        maxValue: 100,
+        unitName: ''
+      }
+    },
+    colorRed: {
+      type: 'pulldown',
+      options: {
+        static: {
+          value: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        xDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        yDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        sineWave: {
+          speed: {
+            value: 1,
+            minValue: 1,
+            maxValue: 10,
+            unitName: ''
+          },
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        }
+      },
+      currentOption: 1
+    },
+    colorGreen: {
+      type: 'pulldown',
+      options: {
+        static: {
+          value: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        xDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        yDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        sineWave: {
+          speed: {
+            value: 1,
+            minValue: 1,
+            maxValue: 10,
+            unitName: ''
+          },
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        }
+      },
+      currentOption: 2
+    },
+    colorBlue: {
+      type: 'pulldown',
+      options: {
+        static: {
+          value: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        xDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        yDistance: {
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        },
+        sineWave: {
+          speed: {
+            value: 1,
+            minValue: 1,
+            maxValue: 10,
+            unitName: ''
+          },
+          minValue: {
+            value: 127,
+            minValue: 0,
+            maxValue: 255,
+            unitName: ''
+          }
+        }
+      },
+      currentOption: 3
+    }
   }
 })
 
 export const mutations = {
+  addRect(state, payload) {
+    state.prismRects[payload.index] = payload.rect
+  },
+  updateRect(state, payload) {
+    state.prismRects[payload.index].color[payload.key] = payload.value
+  },
   updateSliderValue(state, payload) {
-    state.rectVariables[payload.name].options.value = payload.value
+    state.prismVariables[payload.name].options.value = payload.value
   },
   updatePulldownSliderValue(state, payload) {
-    state.rectVariables[payload.controllName].options[payload.optionName][
+    state.prismVariables[payload.controllName].options[payload.optionName][
       payload.sliderName
     ].value = payload.value
   },
   updateOption(state, payload) {
-    state.rectVariables[payload.name].currentOption = payload.value
+    state.prismVariables[payload.name].currentOption = payload.value
   }
 }

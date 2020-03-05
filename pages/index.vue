@@ -4,10 +4,16 @@
       <h1>Interactive Interaction Design</h1>
     </div>
     <div ref="main" class="main">
-      <base-canvas ref="canvas" :width="mainWidth" :height="mainHeight" />
+      <sketch-prism
+        ref="canvas"
+        :width="mainWidth"
+        :height="mainHeight"
+        :x-length="xLength"
+        :y-length="yLength"
+      />
     </div>
     <div class="controller">
-      <div v-for="(value, name, index) in rectVariables" :key="index">
+      <div v-for="(value, name, index) in prismVariables" :key="index">
         <controll-wrapper
           :controll-type="value.type"
           :controll-name="name"
@@ -22,23 +28,30 @@
 <script>
 import 'vue-material-design-icons/styles.css'
 
-import BaseCanvas from '@/components/atoms/BaseCanvas'
+// import BaseCanvas from '@/components/atoms/BaseCanvas'
+import SketchPrism from '@/components/sketch/SketchPrism'
 import ControllWrapper from '@/components/organisms/ControllWrapper'
 
 export default {
   components: {
-    BaseCanvas,
+    // BaseCanvas,
+    SketchPrism,
     ControllWrapper
   },
   data() {
     return {
       mainWidth: 0,
-      mainHeight: 0
+      mainHeight: 0,
+      xLength: 0,
+      yLength: 0
     }
   },
   computed: {
     rectVariables() {
       return this.$store.state.rectVariables
+    },
+    prismVariables() {
+      return this.$store.state.prismVariables
     }
   },
   mounted() {
@@ -46,6 +59,8 @@ export default {
     const mainArea = this.$refs.main
     this.mainWidth = mainArea.offsetWidth
     this.mainHeight = mainArea.offsetHeight
+    this.xLength = Math.floor(this.mainWidth / 50) + 1
+    this.yLength = Math.floor(this.mainHeight / 50) + 1
   }
 }
 </script>
