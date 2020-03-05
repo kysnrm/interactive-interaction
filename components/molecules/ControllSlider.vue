@@ -57,7 +57,6 @@ export default {
 
 <style lang="scss" scoped>
 .slider-header {
-  padding-top: 0.5rem;
   margin-bottom: 0.25rem;
   display: flex;
   justify-content: space-between;
