@@ -5,15 +5,29 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data: () => {
     return {
-      mousePosition: { x: 0, y: 0 }
+      startTime: 0,
+      mousePosition: { x: 0, y: 0 },
+      prismRects: []
     }
   },
   computed: {
     rectVariables() {
       return this.$store.state.rectVariables
+    },
+    // prismRects() {
+    //   return this.$store.state.prismRects
+    // },
+    prismVariables() {
+      return this.$store.state.prismVariables
+    },
+    canvasSize() {
+      const rect = this.$el.getBoundingClientRect()
+      return { width: rect.width, height: rect.height }
     }
   },
   mounted() {
@@ -28,37 +42,117 @@ export default {
       },
       false
     )
+    for (let i = 0; i < 100; i++) {
+      const x = (i % 10) * 50
+      const y = Math.floor(i / 10) * 50
+      const rect = {
+        position: { x, y },
+        color: {
+          colorRed: 0,
+          colorGreen: 0,
+          colorBlue: 0
+        }
+      }
+      this.prismRects[i] = rect
+      console.log(rect)
+    }
     this.render()
   },
   methods: {
-    // getMousePosition(evt) {
-    //   const rect = this.$el.getBoundingClientRect()
-    //   this.mousePosition.x = evt.clientX - rect.left
-    //   this.mousePosition.y = evt.clientY - rect.top
-    //   console.log(this.mousePosition)
-    // },
+    ...mapMutations(['updateRect']),
     sineWave(ellapsedTime, speed) {
+      // 経過時間と速度とサイン波を元にして色を決める
       return Math.abs(Math.sin(ellapsedTime * speed) * 255)
     },
-    switchColor(key, ellapsedTIme) {
-      const color = this.rectVariables[key]
+    culcTargetX(rectX) {
+      // マウスとの x 座標の差とキャンバスのサイズを元に最終的な色を算出
+      const xDistance = this.mousePosition.x - rectX - 25
+      // キャンバスの幅と高さのうち長い方を基準にする
+      const longer = Math.max(this.canvasSize.width, this.canvasSize.height)
+      const targetColor = 255 - (Math.abs(xDistance) / longer) * 255
+      return targetColor
+    },
+    culcTargetY(rectY) {
+      // マウスとの y 座標の差とキャンバスのサイズを元に最終的な色を算出
+      const yDistance = this.mousePosition.y - rectY - 25
+      // キャンバスの幅と高さのうち長い方を基準にする
+      const longer = Math.max(this.canvasSize.width, this.canvasSize.height)
+      const targetColor = 255 - (Math.abs(yDistance) / longer) * 255
+      return targetColor
+    },
+    changeColor(position, current, target, speed) {
+      // x 座標の差と y 座標の差を元にしてマウスとの距離を算出
+      const xDistance = this.mousePosition.x - position.x - 25
+      const yDistance = this.mousePosition.y - position.y - 25
+      const distance = Math.sqrt(xDistance ** 2 + yDistance ** 2)
+      // 現在の色と最終的な色の差分と距離を元に今回変化する量を算出
+      const colorGap = target - current
+      const changeValue = Math.abs((colorGap / (distance + 20)) * speed)
+      // 色の差が 1 以内なら何もしない
+      if (Math.abs(colorGap) < 1) {
+        return current
+      }
+      // 色を変化させる
+      if (colorGap > 0) {
+        return current + changeValue
+      } else {
+        return current - changeValue
+      }
+    },
+    switchColor(key, index, ellapsedTIme) {
+      // 対象となる色を指定する
+      const color = this.prismVariables[key]
+      // 対象となる Rect
+      const rect = this.prismRects[index]
+      // static が選ばれている場合
       if (color.currentOption === 0) {
         return color.options.static.value.value
       }
+      // xDistance が選ばれている場合
       if (color.currentOption === 1) {
+        const target = this.culcTargetX(rect.position.x)
+        return this.changeColor(rect.position, rect.color[key], target, 8)
+      }
+      // yDistance が選ばれている場合
+      if (color.currentOption === 2) {
+        const target = this.culcTargetY(rect.position.y)
+        return this.changeColor(rect.position, rect.color[key], target, 8)
+      }
+      // sineWave が選ばれている場合
+      if (color.currentOption === 3) {
         return this.sineWave(ellapsedTIme, color.options.sineWave.speed.value)
       }
     },
+    updateColor(key, index, ellapsedTime) {
+      const color = this.switchColor(key, index, ellapsedTime)
+      // this.updateRect({ key, index, color })
+      this.prismRects[index].color[key] = color
+      return color
+    },
     render() {
-      this.ctx.clearRect(0, 0, 100, 100)
+      // Canvas のサイズを取得する
+      const clientRect = this.$el.getBoundingClientRect()
+      const width = clientRect.width
+      const height = clientRect.height
+      // 直前のフレームをクリアする
+      this.ctx.clearRect(0, 0, width, height)
+      // 現在までの経過時間を取得する
       const nowTime = Date.now()
       const ellapsedTime = (nowTime - this.startTime) / 1000
-      const red = this.switchColor('colorRed', ellapsedTime)
-      const green = this.switchColor('colorGreen', ellapsedTime)
-      const blue = this.switchColor('colorBlue', ellapsedTime)
-      const rectSize = this.rectVariables.rectSize.options.value
-      this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
-      this.ctx.fillRect(0, 0, rectSize, rectSize)
+
+      const rectSize = 50
+      // this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
+
+      for (let i = 0; i < this.prismRects.length; i++) {
+        const rect = this.prismRects[i]
+        // 各色を指定する
+        const red = this.updateColor('colorRed', i, ellapsedTime)
+        const green = this.updateColor('colorGreen', i, ellapsedTime)
+        const blue = this.updateColor('colorBlue', i, ellapsedTime)
+        this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
+        this.ctx.fillRect(rect.position.x, rect.position.y, rectSize, rectSize)
+      }
+      // this.ctx.fillRect(0, 0, rectSize, rectSize)
       requestAnimationFrame(this.render)
     }
   }
