@@ -78,6 +78,15 @@ export const state = () => ({
   },
   prismRects: [],
   prismVariables: {
+    spreadingSpeed: {
+      type: 'slider',
+      options: {
+        value: 8,
+        minValue: 1,
+        maxValue: 32,
+        unitName: ''
+      }
+    },
     colorRed: {
       type: 'pulldown',
       options: {

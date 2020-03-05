@@ -59,24 +59,28 @@ export default {
   },
   methods: {
     ...mapMutations(['updateRect']),
-    sineWave(ellapsedTime, speed) {
+    sineWave(ellapsedTime, speed, minValue) {
       // 経過時間と速度とサイン波を元にして色を決める
-      return Math.abs(Math.sin(ellapsedTime * speed) * 255)
+      return Math.abs(
+        Math.sin(ellapsedTime * speed) * (255 - minValue) + minValue
+      )
     },
-    culcTargetX(rectX) {
+    culcTargetX(rectX, minValue) {
       // マウスとの x 座標の差とキャンバスのサイズを元に最終的な色を算出
       const xDistance = this.mousePosition.x - rectX - 25
       // キャンバスの幅と高さのうち長い方を基準にする
       const longer = Math.max(this.canvasSize.width, this.canvasSize.height)
-      const targetColor = 255 - (Math.abs(xDistance) / longer) * 255
+      const targetColor =
+        255 - (Math.abs(xDistance) / longer) * (255 - minValue)
       return targetColor
     },
-    culcTargetY(rectY) {
+    culcTargetY(rectY, minValue) {
       // マウスとの y 座標の差とキャンバスのサイズを元に最終的な色を算出
       const yDistance = this.mousePosition.y - rectY - 25
       // キャンバスの幅と高さのうち長い方を基準にする
       const longer = Math.max(this.canvasSize.width, this.canvasSize.height)
-      const targetColor = 255 - (Math.abs(yDistance) / longer) * 255
+      const targetColor =
+        255 - (Math.abs(yDistance) / longer) * (255 - minValue)
       return targetColor
     },
     changeColor(position, current, target, speed) {
@@ -109,17 +113,37 @@ export default {
       }
       // xDistance が選ばれている場合
       if (color.currentOption === 1) {
-        const target = this.culcTargetX(rect.position.x)
-        return this.changeColor(rect.position, rect.color[key], target, 8)
+        const target = this.culcTargetX(
+          rect.position.x,
+          color.options.xDistance.minValue.value
+        )
+        return this.changeColor(
+          rect.position,
+          rect.color[key],
+          target,
+          this.prismVariables.spreadingSpeed.options.value
+        )
       }
       // yDistance が選ばれている場合
       if (color.currentOption === 2) {
-        const target = this.culcTargetY(rect.position.y)
-        return this.changeColor(rect.position, rect.color[key], target, 8)
+        const target = this.culcTargetY(
+          rect.position.y,
+          color.options.yDistance.minValue.value
+        )
+        return this.changeColor(
+          rect.position,
+          rect.color[key],
+          target,
+          this.prismVariables.spreadingSpeed.options.value
+        )
       }
       // sineWave が選ばれている場合
       if (color.currentOption === 3) {
-        return this.sineWave(ellapsedTIme, color.options.sineWave.speed.value)
+        return this.sineWave(
+          ellapsedTIme,
+          color.options.sineWave.speed.value,
+          color.options.sineWave.minValue.value
+        )
       }
     },
     updateColor(key, index, ellapsedTime) {
@@ -140,7 +164,6 @@ export default {
       const ellapsedTime = (nowTime - this.startTime) / 1000
 
       const rectSize = 50
-      // this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
 
       for (let i = 0; i < this.prismRects.length; i++) {
         const rect = this.prismRects[i]
@@ -151,7 +174,6 @@ export default {
         this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
         this.ctx.fillRect(rect.position.x, rect.position.y, rectSize, rectSize)
       }
-      // this.ctx.fillRect(0, 0, rectSize, rectSize)
       requestAnimationFrame(this.render)
     }
   }
