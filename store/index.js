@@ -87,6 +87,15 @@ export const state = () => ({
         unitName: ''
       }
     },
+    spreadingDelay: {
+      type: 'slider',
+      options: {
+        value: 20,
+        minValue: 0,
+        maxValue: 100,
+        unitName: ''
+      }
+    },
     colorRed: {
       type: 'pulldown',
       options: {

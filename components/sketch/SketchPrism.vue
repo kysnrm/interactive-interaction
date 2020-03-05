@@ -30,7 +30,9 @@ export default {
   },
   mounted() {
     this.ctx = this.$el.getContext('2d')
+    // マウント時のタイムスタンプを取得
     this.startTime = Date.now()
+    // マウスの位置を取得するイベントを付与
     this.$el.addEventListener(
       'mousemove',
       (evt) => {
@@ -40,6 +42,7 @@ export default {
       },
       false
     )
+    // prismRects に rect を追加
     setTimeout(() => {
       for (let i = 0; i < this.xLength * this.yLength; i++) {
         const x = (i % this.xLength) * 50
@@ -90,7 +93,11 @@ export default {
       const distance = Math.sqrt(xDistance ** 2 + yDistance ** 2)
       // 現在の色と最終的な色の差分と距離を元に今回変化する量を算出
       const colorGap = target - current
-      const changeValue = Math.abs((colorGap / (distance + 20)) * speed)
+      const changeValue = Math.abs(
+        (colorGap /
+          (distance + this.prismVariables.spreadingDelay.options.value)) *
+          speed
+      )
       // 色の差が 1 以内なら何もしない
       if (Math.abs(colorGap) < 1) {
         return current
@@ -148,7 +155,6 @@ export default {
     },
     updateColor(key, index, ellapsedTime) {
       const color = this.switchColor(key, index, ellapsedTime)
-      // this.updateRect({ key, index, color })
       this.prismRects[index].color[key] = color
       return color
     },
@@ -163,8 +169,6 @@ export default {
       const nowTime = Date.now()
       const ellapsedTime = (nowTime - this.startTime) / 1000
 
-      const rectSize = 50
-
       for (let i = 0; i < this.prismRects.length; i++) {
         const rect = this.prismRects[i]
         // 各色を指定する
@@ -172,7 +176,7 @@ export default {
         const green = this.updateColor('colorGreen', i, ellapsedTime)
         const blue = this.updateColor('colorBlue', i, ellapsedTime)
         this.ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`
-        this.ctx.fillRect(rect.position.x, rect.position.y, rectSize, rectSize)
+        this.ctx.fillRect(rect.position.x, rect.position.y, 50, 50)
       }
       requestAnimationFrame(this.render)
     }
