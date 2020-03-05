@@ -61,9 +61,9 @@ export default {
     ...mapMutations(['updateRect']),
     sineWave(ellapsedTime, speed, minValue) {
       // 経過時間と速度とサイン波を元にして色を決める
-      return Math.abs(
-        Math.sin(ellapsedTime * speed) * (255 - minValue) + minValue
-      )
+      const color =
+        ((Math.sin(ellapsedTime * speed) + 1) / 2) * (255 - minValue) + minValue
+      return color
     },
     culcTargetX(rectX, minValue) {
       // マウスとの x 座標の差とキャンバスのサイズを元に最終的な色を算出
