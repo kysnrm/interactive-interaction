@@ -18,36 +18,39 @@ export default {
   },
   data: () => {
     return {
-      isMousedown: false,
       lastPosition: 0
     }
   },
   methods: {
     dotTouchStart(e) {
-      this.isMousedown = true
       this.lastPosition = e.clientX
+      // スライダーの外側に出ても操作できるようにイベントリスナーを追加
       document.addEventListener('mousemove', this.dotMove)
       document.addEventListener('mouseup', this.dotTouchEnd)
+      // ドラッグ中にテキストを選択しないように
       e.preventDefault()
     },
     dotMove(e) {
-      if (this.isMousedown !== true) {
+      // スライダーの幅内に収まっていなければ何もしない
+      const clientRect = this.$el.getBoundingClientRect()
+      if (e.clientX < clientRect.left - 8 || e.clientX > clientRect.right + 8) {
         return
       }
+      // 動いた距離を算出
       const distance = e.clientX - this.lastPosition
       this.$emit('dotMove', distance)
+      // lastPosition を更新する
       this.lastPosition = e.clientX
     },
     dotTouchEnd(e) {
-      this.isMousedown = false
-      this.lastPosition = 0
+      // スライダーの操作を終えてすべてのイベントリスナーを削除
       document.removeEventListener('mousemove', this.dotMove)
       document.removeEventListener('mouseup', this.dotTouchEnd)
     },
     barTouchStart(e) {
+      // そのままドットのスライドも可能にする
       this.dotTouchStart(e)
       this.$emit('clickBar', e)
-      e.preventDefault()
     }
   }
 }

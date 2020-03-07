@@ -32,10 +32,12 @@ export default {
       return ((value - min) / range) * 100
     },
     dotMove(e) {
-      const width = 208
+      // 横幅と数値の範囲と今回動いた距離を元に新しい値を算出
+      const width = this.$el.clientWidth
       const range = this.maxValue - this.minValue
       const moveDistance = (e / width) * range
       let newValue = this.value + moveDistance
+      // 新しい値が範囲外にある場合は範囲内に変更
       if (newValue < this.minValue) {
         newValue = this.minValue
       }
@@ -45,7 +47,7 @@ export default {
       this.$emit('updateValue', newValue)
     },
     clickBar(e) {
-      const width = 208
+      const width = this.$el.clientWidth
       const range = this.maxValue - this.minValue
       const clickPosition = e.offsetX
       const newValue = this.minValue + (clickPosition / width) * range
