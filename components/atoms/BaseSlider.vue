@@ -18,22 +18,17 @@ export default {
   },
   data: () => {
     return {
-      isMousedown: false,
       lastPosition: 0
     }
   },
   methods: {
     dotTouchStart(e) {
-      this.isMousedown = true
       this.lastPosition = e.clientX
       document.addEventListener('mousemove', this.dotMove)
       document.addEventListener('mouseup', this.dotTouchEnd)
       e.preventDefault()
     },
     dotMove(e) {
-      if (this.isMousedown !== true) {
-        return
-      }
       // スライダーの幅内に収まっていなければ何もしない
       const clientRect = this.$el.getBoundingClientRect()
       if (e.clientX < clientRect.left || e.clientX > clientRect.right) {
@@ -44,7 +39,6 @@ export default {
       this.lastPosition = e.clientX
     },
     dotTouchEnd(e) {
-      this.isMousedown = false
       this.lastPosition = 0
       document.removeEventListener('mousemove', this.dotMove)
       document.removeEventListener('mouseup', this.dotTouchEnd)
