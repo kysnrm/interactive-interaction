@@ -34,6 +34,11 @@ export default {
       if (this.isMousedown !== true) {
         return
       }
+      // スライダーの幅内に収まっていなければ何もしない
+      const clientRect = this.$el.getBoundingClientRect()
+      if (e.clientX < clientRect.left || e.clientX > clientRect.right) {
+        return
+      }
       const distance = e.clientX - this.lastPosition
       this.$emit('dotMove', distance)
       this.lastPosition = e.clientX
