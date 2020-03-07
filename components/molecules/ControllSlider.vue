@@ -32,7 +32,7 @@ export default {
       return ((value - min) / range) * 100
     },
     dotMove(e) {
-      const width = 208
+      const width = this.$el.clientWidth
       const range = this.maxValue - this.minValue
       const moveDistance = (e / width) * range
       let newValue = this.value + moveDistance
@@ -45,7 +45,7 @@ export default {
       this.$emit('updateValue', newValue)
     },
     clickBar(e) {
-      const width = 208
+      const width = this.$el.clientWidth
       const range = this.maxValue - this.minValue
       const clickPosition = e.offsetX
       const newValue = this.minValue + (clickPosition / width) * range
