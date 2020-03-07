@@ -31,7 +31,7 @@ export default {
     dotMove(e) {
       // スライダーの幅内に収まっていなければ何もしない
       const clientRect = this.$el.getBoundingClientRect()
-      if (e.clientX < clientRect.left || e.clientX > clientRect.right) {
+      if (e.clientX < clientRect.left - 8 || e.clientX > clientRect.right + 8) {
         return
       }
       const distance = e.clientX - this.lastPosition
